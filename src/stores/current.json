@@ -1,0 +1,12 @@
+{
+    battle: 1,
+    turn: 1,
+    phase: 0,
+    player: 'first',
+    initiative: '',
+    britishMorale: 0,
+    americanMorale: 0,
+    frenchMorale: 0,
+    britishVP: 0,
+    americanVP: 0
+}

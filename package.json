@@ -1,0 +1,29 @@
+{
+  "name": "bar",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "debug": "node node_modules/react-native/local-cli/cli.js run-android",
+    "get-js": "curl \"http://localhost:8081/index.android.bundle?platform=android&dev=false&minify=true\" -o \"android/app/src/main/assets/index.android.bundle\"",
+	"genkey": "keytool -genkey -v -keystore scs.keystore -alias scs -keyalg RSA -keysize 2048 -validity 10000",
+    "assemble": "cd android && gradlew assembleRelease && cd ..",
+    "install-dbg": "adb install -r android/app/build/outputs/apk/appstarter-debug-1.0.apk",
+    "install-rel": "adb install -r android/app/build/outputs/apk/appstarter-release-1.0.apk",
+    "bridge": "adb reverse tcp:8081 tcp:8081",
+    "menu": "adb shell input keyevent 82",
+    "logs": "adb logcat *:S ReactNative:V ReactNativeJS:V"
+  },
+  "dependencies": {
+      "apsl-react-native-button": "^3.0.0",
+      "autobind-decorator": "^1.3.3",
+      "moment": "^2.14.1",
+      "react": "15.3.1",
+      "react-native": "^0.32.0",
+      "react-native-audioplayer": "^0.2.0",
+      "react-native-fs": "^1.5.1",
+      "react-native-menu": "^0.20.1",
+      "react-native-scrollable-tab-view": "^0.5.4",
+      "react-native-simple-radio-button": "^2.2.0"
+  }
+}
