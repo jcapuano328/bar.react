@@ -1,7 +1,7 @@
 'use strict'
 var log = require('./log');
 
-var defaultPhases = [
+let defaultPhases = [
 	"Initiative",
     {
     	"American": [
@@ -22,7 +22,7 @@ var defaultPhases = [
 	"End of Turn"
 ];
 
-var phases = defaultPhases;
+let phases = defaultPhases;
 
 module.exports = {
 	length() {

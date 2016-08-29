@@ -4,6 +4,7 @@ var React = require('react');
 import { View, Text } from 'react-native';
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var TurnView = require('./turnView');
+var InitiativeView = require('./initiativeView');
 var Current = require('./services/current');
 var icons = require('./widgets/icons');
 
@@ -29,7 +30,7 @@ var BattleView = React.createClass({
     onChangeTab({i, ref}) {
     },
     render() {
-        let battle = this.props.battle || {};        
+        let battle = this.props.battle || {};
         return (
             <View style={{flex: 1,backgroundColor: 'rgba(0,0,0,0.01)'}}>
                 <TurnView logo={icons[battle.image]} events={this.props.events} />
@@ -38,7 +39,7 @@ var BattleView = React.createClass({
                     onChangeTab={this.onChangeTab}
                     initialPage={this.state.initialPage}
                 >
-                    <Text tabLabel="Initiative" events={this.props.events} />
+                    <InitiativeView tabLabel="Initiative" events={this.props.events} />
                     <Text tabLabel="Fire" events={this.props.events} />
                     <Text tabLabel="Melee" events={this.props.events} />
                     <Text tabLabel="Morale" events={this.props.events} />

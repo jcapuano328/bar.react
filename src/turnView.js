@@ -3,7 +3,7 @@
 var React = require('react');
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 var SpinSelect = require('./widgets/spinSelect');
-var icons = require('./widgets/icons');
+var Icons = require('./widgets/icons');
 var Current = require('./services/current');
 
 var TurnView = React.createClass({
@@ -16,6 +16,7 @@ var TurnView = React.createClass({
     },
     componentDidMount: function() {
         this.props.events.addListener('reset', this.onReset);
+        this.props.events.addListener('initiativechange', this.onReset);
     },
     shouldComponentUpdate(nextProps, nextState) {
         return true;
@@ -65,7 +66,7 @@ var TurnView = React.createClass({
     },
     render() {
         //console.log(this.props);
-        console.log(this.state);
+        console.log(this.state.player);
         return (
             <View style={{flexDirection: 'row', height: 90, marginTop: 60, marginLeft: 10, marginRight: 10}}>
                 <View style={{flex: 1}}>
@@ -77,7 +78,7 @@ var TurnView = React.createClass({
                 </View>
                 <View style={{flex: 1}}>
                     <TouchableOpacity onPress={this.onNextPlayer} >
-                        <Image style={{width: 96,height: 88,resizeMode: 'contain'}} source={icons[this.state.player]}/>
+                        <Image style={{width: 96,height: 88,resizeMode: 'contain'}} source={Icons[(this.state.player||'').toLowerCase()]}/>
                     </TouchableOpacity>
                 </View>
             </View>

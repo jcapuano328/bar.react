@@ -35,7 +35,7 @@ var DiceRoll = React.createClass({
       die.increment(true);
       this.props.onDie && this.props.onDie(e, die.value());
     },
-    render() {
+    render() {        
         this.dice = new Dice.Dice(this.props.dice);
         //style={{flex: 1,padding: 5, alignItems: 'center'}}
         //, alignItems: 'center'

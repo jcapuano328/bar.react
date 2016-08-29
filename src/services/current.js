@@ -125,13 +125,30 @@ module.exports = {
         	return this.player();
 		});
 	},
-	player() {
-		return _current.player;
+	player(v) {
+		if (typeof v != 'undefined') {
+        	_current.player = v;
+		}
+        return _current.player;
 	},
 	initiative(v) {
     	if (typeof v != 'undefined') {
         	_current.initiative = v;
-		}		
+		}
         return _current.initiative;
+    },
+	britishMorale(v) {
+    	if (typeof v != 'undefined') {
+        	_current.britishMorale = v;
+		}
+        return _current.britishMorale;
+    },
+	americanMorale(v) {
+    	if (typeof v != 'undefined') {
+        	_current.americanMorale = v;
+		}
+        return _current.americanMorale;
     }
+
+
 };

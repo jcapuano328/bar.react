@@ -4,23 +4,23 @@ var React = require('react');
 import { View, Image, Text } from 'react-native';
 var SpinNumeric = require('./widgets/spinNumeric');
 var IconButton = require('./widgets/iconButton');
+var Button = require('apsl-react-native-button');
 var Icons = require('./widgets/icons');
 var DiceRoll = require('./widgets/diceRoll');
 var Initiative = require('./services/initiative');
-var Player = require('./services/player');
 
-var AdminInitiativeView = React.createClass({
+var InitiativeView = React.createClass({
     dice: [
-        {num: 1, low: 1, high: 6, color: 'red'},
-        {num: 1, low: 1, high: 6, color: 'blue'}
+        {num: 1, low: 0, high: 9, color: 'red'},
+        {num: 1, low: 0, high: 9, color: 'blue'}
     ],
     getInitialState() {
         return {
             initiative: Initiative.current(),
             british: '0',
             american: '0',
-            die1: 1,
-            die2: 1
+            die1: 0,
+            die2: 0
         };
     },
     componentDidMount() {
@@ -28,6 +28,14 @@ var AdminInitiativeView = React.createClass({
     },
     onReset() {
         this.setState({initiative: Initiative.current()});
+    },
+    onChangeBritish(v) {
+        this.state.british = v;
+        this.resolve();
+    },
+    onChangeAmerican(v) {
+        this.state.american = v;
+        this.resolve();
     },
     onDiceRoll(d) {
         this.state.die1 = d[0].value;
@@ -46,46 +54,49 @@ var AdminInitiativeView = React.createClass({
         });
     },
     resolve() {
-        this.setState(this.state);
-        /*
-        Initiative.find(this.state.die1, this.state.die2)
+        Initiative.find(+this.state.british,+this.state.american,this.state.die1,this.state.die2)
         .then((init) => {
-            this.setState({die1: this.state.die1, die2: this.state.die2, initiative: init || 'tie'});
+            this.state.initiative = init || 'tie';
+            this.setState(this.state);
             if (init) {
                 this.props.events.emit('initiativechange');
             }
         })
         .catch((err) => {
-            this.setState({die1: die1, die2: die2, initiative: ''});
+            this.state.initiative = '';
+            this.setState(this.state);
             log.error(err);
-        });
-        */
+        })
+        .done();
     },
     render() {
-        let player = Player.get();
         return (
             <View style={{flex: 1}}>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                    <View style={{flex:1, justifyContent: 'center'}}>
-                        <Image style={{width: 96,height: 88,resizeMode: 'contain'}} source={icons['british']}/>
+                <View style={{flex: 1}}>
+                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={{flex:1}}/>
+                        <View style={{flex:1, justifyContent: 'center'}}>
+                            <Image style={{width: 64,height: 64,resizeMode: 'contain'}} source={Icons['british']}/>
+                        </View>
+                        <View style={{flex:2, justifyContent: 'center'}}>
+                            <SpinNumeric value={this.state.british} min={0} max={10} onChanged={this.onChangeBritish} />
+                        </View>
+                        <View style={{flex:1}}/>
                     </View>
-                    <View style={{flex:2, justifyContent: 'center'}}>
-                        <SpinNumeric value={this.props.british} min={0} max={10} onChanged={this.props.onChangeBritish} />
+                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                        <View style={{flex:1}}/>
+                        <View style={{flex:1, justifyContent: 'center'}}>
+                            <Image style={{width: 64,height: 64,resizeMode: 'contain'}} source={Icons['american']}/>
+                        </View>
+                        <View style={{flex:2, justifyContent: 'center'}}>
+                            <SpinNumeric value={this.state.american} min={0} max={10} onChanged={this.onChangeAmerican} />
+                        </View>
+                        <View style={{flex:1}}/>
                     </View>
                 </View>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
-                    <View style={{flex:1, justifyContent: 'center'}}>
-                        <Image style={{width: 96,height: 88,resizeMode: 'contain'}} source={icons['american']}/>
-                    </View>
-                    <View style={{flex:2, justifyContent: 'center'}}>
-                        <SpinNumeric value={this.props.american} min={0} max={10} onChanged={this.props.onChangeAmerican} />
-                    </View>
-                </View>
-
-                <View style={{flex: 1,flexDirection: 'row'}}>
-                    <Text style={{flex: 1, fontSize: 20, marginLeft: 5, marginVertical: 25}}>Initiative</Text>
-                    <View style={{flex: 2, marginRight: 5}}>
-                    <IconButton image={this.state.initiative.toLowerCase()} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
+                <View style={{flex: 4,flexDirection: 'row'}}>
+                    <View style={{flex: 1, marginRight: 5, alignItems: 'center'}}>
+                        <IconButton image={(this.state.initiative||'tie').toLowerCase()} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
                     </View>
                     <View style={{flex: 1, marginRight: 5}}>
                         <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} onRoll={this.onDiceRoll} onDie={this.onDieChanged}/>
@@ -97,4 +108,4 @@ var AdminInitiativeView = React.createClass({
     }
 });
 
-module.exports = AdminInitiativeView;
+module.exports = InitiativeView;
