@@ -127,5 +127,11 @@ module.exports = {
 	},
 	player() {
 		return _current.player;
-	}
+	},
+	initiative(v) {
+    	if (typeof v != 'undefined') {
+        	_current.initiative = v;
+		}		
+        return _current.initiative;
+    }
 };

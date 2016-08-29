@@ -9,6 +9,7 @@ module.exports = {
 	"french": require('../res/french-flag.png'),
 	"first": require('../res/british-flag.png'),
 	"second": require('../res/american-flag.jpg'),
+	"tie": require('../res/tie.png'),
 
 	"1": require('../res/1.png'),
 	"2": require('../res/2.png'),
