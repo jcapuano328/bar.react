@@ -66,6 +66,8 @@ let FireView = React.createClass({
     },
     render() {
         let mods = Current.battle().modifiers.fire || [];
+        let result = this.state.results.replace('*', '');
+        let leader = this.state.results.indexOf('*') > -1 ? 'leader-casualty' : null;
         return (
             <View style={{flex: 1}}>
                 <View style={{flex: 4, flexDirection: 'row'}}>
@@ -89,9 +91,15 @@ let FireView = React.createClass({
                 <View style={{flex: 1}}>
                     <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
                         <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-                            {Icons[this.state.results.toUpperCase()]
-                                ? <Image style={{marginTop: 13, height: 64, width: 64, resizeMode: 'stretch'}} source={Icons[this.state.results]} />
+                            {Icons[result]
+                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[result]} />
                                 : <Text style={{marginTop: 35, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
+                            }
+                        </View>
+                        <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
+                            {Icons[leader]
+                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[leader]} />
+                                : null
                             }
                         </View>
                         <View style={{flex: 2, marginRight: 15}}>
