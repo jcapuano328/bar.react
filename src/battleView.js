@@ -5,13 +5,14 @@ import { View, Text } from 'react-native';
 var ScrollableTabView = require('react-native-scrollable-tab-view');
 var TurnView = require('./turnView');
 var InitiativeView = require('./initiativeView');
+var FireView = require('./fireView');
 var Current = require('./services/current');
 var icons = require('./widgets/icons');
 
 var BattleView = React.createClass({
     getInitialState() {
         return {
-            initialPage: 0
+            initialPage: 1
         };
     },
     componentWillMount: function() {
@@ -40,7 +41,7 @@ var BattleView = React.createClass({
                     initialPage={this.state.initialPage}
                 >
                     <InitiativeView tabLabel="Initiative" events={this.props.events} />
-                    <Text tabLabel="Fire" events={this.props.events} />
+                    <FireView tabLabel="Fire" events={this.props.events} />
                     <Text tabLabel="Melee" events={this.props.events} />
                     <Text tabLabel="Morale" events={this.props.events} />
                     <Text tabLabel="Victory" events={this.props.events} />

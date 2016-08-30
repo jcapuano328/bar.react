@@ -16,6 +16,11 @@ module.exports = {
 	"3": require('../res/3.png'),
 	"4": require('../res/4.png'),
 	"5": require('../res/5.png'),
+	"Miss": require('../res/no-effect.png'),
+	"AM": require('../res/morale-loss.png'),
+	"R": require('../res/retreat.png'),
+	"D": require('../res/disrupted.png'),
+	"leader-casualty": require('../res/leader-casualty.jpg'),
 
 	"refreshButton": require('../res/refresh-light.png'),
 	"prevButton":	require('../res/ic_action_previous_item.png'),
