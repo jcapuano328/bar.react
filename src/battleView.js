@@ -7,13 +7,14 @@ var TurnView = require('./turnView');
 var InitiativeView = require('./initiativeView');
 var FireView = require('./fireView');
 var MeleeView = require('./meleeView');
+var MoraleView = require('./moraleView');
 var Current = require('./services/current');
 var icons = require('./widgets/icons');
 
 var BattleView = React.createClass({
     getInitialState() {
         return {
-            initialPage: 2
+            initialPage: 3
         };
     },
     componentWillMount: function() {
@@ -44,7 +45,7 @@ var BattleView = React.createClass({
                     <InitiativeView tabLabel="Initiative" events={this.props.events} />
                     <FireView tabLabel="Fire" events={this.props.events} />
                     <MeleeView tabLabel="Melee" events={this.props.events} />
-                    <Text tabLabel="Morale" events={this.props.events} />
+                    <MoraleView tabLabel="Morale" events={this.props.events} />
                     <Text tabLabel="Victory" events={this.props.events} />
                     <Text tabLabel="General" events={this.props.events} />
                 </ScrollableTabView>

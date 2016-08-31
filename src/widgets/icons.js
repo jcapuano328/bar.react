@@ -21,6 +21,8 @@ module.exports = {
 	"R": require('../res/retreat.png'),
 	"D": require('../res/disrupted.png'),
 	"leader-casualty": require('../res/leader-casualty.png'),
+	"pass": require('../res/pass.png'),
+	"fail": require('../res/fail.jpg'),
 
 	"refreshButton": require('../res/refresh-light.png'),
 	"prevButton":	require('../res/ic_action_previous_item.png'),

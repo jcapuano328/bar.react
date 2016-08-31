@@ -137,6 +137,18 @@ module.exports = {
 		}
         return _current.initiative;
     },
+	armyMorale(n,v) {
+		n = n.toLowerCase();
+		if (n == 'british') {
+			return this.britishMorale(v);
+		}
+		if (n == 'american') {
+			return this.americanMorale(v);
+		}
+		if (n == 'french') {
+			return this.frenchMorale(v);
+		}
+	},
 	britishMorale(v) {
     	if (typeof v != 'undefined') {
         	_current.britishMorale = v;
@@ -148,7 +160,11 @@ module.exports = {
         	_current.americanMorale = v;
 		}
         return _current.americanMorale;
+    },
+	frenchMorale(v) {
+    	if (typeof v != 'undefined') {
+        	_current.frenchMorale = v;
+		}
+        return _current.frenchMorale;
     }
-
-
 };
