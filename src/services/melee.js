@@ -55,8 +55,7 @@ module.exports = {
 		let battle = Current.battle();
         return [{name: 'Tactical Leader', value: 0}].concat(battle.modifiers.melee.defend);
 	},
-    resolve(odds,attackmorale,attacknationality,attackleader,attackmods,defendmorale,defendnationality,defendleader,defendmods,combatdie,tacticaldie) {
-		console.log(attackmods);
+    resolve(odds,attacknationality,attackmorale,attackleader,attackmods,defendnationality,defendmorale,defendleader,defendmods,combatdie,tacticaldie) {		
 		let attackdrm = modifierDrm(attackmods, this.attackModifiers());
 		let defenddrm = modifierDrm(defendmods, this.defendModifiers());
 		let attacktacticalldr = attackmods.indexOf('Tactical Leader') > -1;

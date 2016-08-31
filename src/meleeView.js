@@ -83,8 +83,9 @@ let MeleeView = React.createClass({
     },
     getModifiers(type) {
         let mods = [];
-        Object.keys(this.state[type+'mods']).forEach((k) => {
-            if (this.state.mods[k]) {
+        let modifiers = this.state[type+'mods'];
+        Object.keys(modifiers).forEach((k) => {
+            if (modifiers[k]) {
                 mods.push(k);
             }
         });
@@ -92,8 +93,8 @@ let MeleeView = React.createClass({
     },
     resolve() {
         this.state.results = Melee.resolve(this.state.odds,
-            this.state.attackmorale,this.state.attacknationality,this.state.attackleader,this.getModifiers('attack'),
-            this.state.defendmorale,this.state.defendnationality,this.state.defendleader,this.getModifiers('defend'),
+            this.state.attacknationality,+this.state.attackmorale,+this.state.attackleader,this.getModifiers('attack'),
+            this.state.defendnationality,+this.state.defendmorale,+this.state.defendleader,this.getModifiers('defend'),
             this.state.die1,this.state.die2);
         this.setState(this.state);
     },
@@ -158,17 +159,8 @@ let MeleeView = React.createClass({
                                 })}
                             </Picker>
                         </View>
-                        <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-                            {Icons[result]
-                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[result]} />
-                                : <Text style={{marginTop: 35, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
-                            }
-                        </View>
-                        <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-                            {Icons[leader]
-                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[leader]} />
-                                : null
-                            }
+                        <View style={{flex: 2, alignItems: 'flex-start', justifyContent: 'center'}}>
+                            <Text style={{marginTop: 25, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
                         </View>
                         <View style={{flex: 1, marginRight: 5}}>
                             <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]}
