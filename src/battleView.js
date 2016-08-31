@@ -6,13 +6,14 @@ var ScrollableTabView = require('react-native-scrollable-tab-view');
 var TurnView = require('./turnView');
 var InitiativeView = require('./initiativeView');
 var FireView = require('./fireView');
+var MeleeView = require('./meleeView');
 var Current = require('./services/current');
 var icons = require('./widgets/icons');
 
 var BattleView = React.createClass({
     getInitialState() {
         return {
-            initialPage: 1
+            initialPage: 2
         };
     },
     componentWillMount: function() {
@@ -42,7 +43,7 @@ var BattleView = React.createClass({
                 >
                     <InitiativeView tabLabel="Initiative" events={this.props.events} />
                     <FireView tabLabel="Fire" events={this.props.events} />
-                    <Text tabLabel="Melee" events={this.props.events} />
+                    <MeleeView tabLabel="Melee" events={this.props.events} />
                     <Text tabLabel="Morale" events={this.props.events} />
                     <Text tabLabel="Victory" events={this.props.events} />
                     <Text tabLabel="General" events={this.props.events} />
