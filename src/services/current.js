@@ -166,5 +166,25 @@ module.exports = {
         	_current.frenchMorale = v;
 		}
         return _current.frenchMorale;
+    },
+	armyVP(n,v) {
+		n = n.toLowerCase();
+		if (n == 'british') {
+			return this.britishVP(v);
+		}
+		//else if (n == 'american') {
+		return this.americanVP(v);
+	},
+	britishVP(v) {
+    	if (typeof v != 'undefined') {
+        	_current.britishVP = v;
+		}
+        return _current.britishVP;
+    },
+	americanVP(v) {
+    	if (typeof v != 'undefined') {
+        	_current.americanVP = v;
+		}
+        return _current.americanVP;
     }
 };

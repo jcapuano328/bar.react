@@ -175,14 +175,6 @@ let MeleeView = React.createClass({
 });
 
 let MeleeInput = React.createClass({
-    /*
-        header label
-        nationality (radios?)
-        spin input morale
-        spin input leader
-        multi select list modifiers
-
-    */
     render() {
         return (
             <View style={{flex: 1, justifyContent: 'center', borderColor: 'gray', borderStyle: 'solid', borderLeftWidth: 1, borderRightWidth: 1}}>
