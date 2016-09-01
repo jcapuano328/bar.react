@@ -1,15 +1,15 @@
 {
   "name": "bar",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "debug": "node node_modules/react-native/local-cli/cli.js run-android",
     "get-js": "curl \"http://localhost:8081/index.android.bundle?platform=android&dev=false&minify=true\" -o \"android/app/src/main/assets/index.android.bundle\"",
-	"genkey": "keytool -genkey -v -keystore scs.keystore -alias scs -keyalg RSA -keysize 2048 -validity 10000",
+	"genkey": "keytool -genkey -v -keystore bar.keystore -alias bar -keyalg RSA -keysize 2048 -validity 10000",
     "assemble": "cd android && gradlew assembleRelease && cd ..",
-    "install-dbg": "adb install -r android/app/build/outputs/apk/appstarter-debug-1.0.apk",
-    "install-rel": "adb install -r android/app/build/outputs/apk/appstarter-release-1.0.apk",
+    "install-dbg": "adb install -r android/app/build/outputs/apk/bar-debug-1.0.apk",
+    "install-rel": "adb install -r android/app/build/outputs/apk/bar-release-1.0.apk",
     "bridge": "adb reverse tcp:8081 tcp:8081",
     "menu": "adb shell input keyevent 82",
     "logs": "adb logcat *:S ReactNative:V ReactNativeJS:V"

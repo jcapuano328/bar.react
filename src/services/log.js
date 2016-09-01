@@ -6,7 +6,7 @@ let levels = {
 	WARN: 1,
 	ERROR: 0
 };
-let level = levels.DEBUG;
+let level = levels.WARN;
 
 module.exports = {
 	levels: levels,
