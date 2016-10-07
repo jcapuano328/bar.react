@@ -1,17 +1,17 @@
 'use strict'
-
-var Store = require('../stores/current');
+import {Store, Log} from 'react-native-app-nub';
+var store = Store('bar.app.current');
 var Battles = require('./battles');
 var Phases = require('./phases');
 var moment = require('moment');
-var log = require('./log');
+var log = Log;
 var TURN_MINS = 60;
 
 var _current = {};
 
 module.exports = {
 	load() {
-		return Store.load()
+		return store.load()
 		.then((current) => {
         	_current = current;
 			Phases.init(this.battle());
@@ -19,18 +19,30 @@ module.exports = {
 		});
 	},
 	save() {
-		return Store.save(_current);
+		return store.save(_current);
 	},
 	remove() {
-		return Store.remove()
+		return store.remove()
 		.then(() => {
 			_current = null;
 		});
 	},
 	reset(data) {
-		return Store.reset(data)
+		let blank = {
+		    battle: data.id,
+		    turn: 1,
+		    phase: 0,
+		    player: 'first',
+		    initiative: '',
+		    britishMorale: data.startBritishMorale,
+		    americanMorale: data.startAmericanMorale,
+		    frenchMorale: data.startFrenchMorale,
+		    britishVP: 0,
+		    americanVP: 0
+		};
+		return store.save(blank)
 		.then((current) => {
-			_current = current;
+			_current = blank;
 			Phases.init(this.battle());
 			return _current;
 		});

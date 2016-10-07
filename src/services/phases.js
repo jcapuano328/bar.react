@@ -1,5 +1,6 @@
 'use strict'
-var log = require('./log');
+import {Log} from 'react-native-app-nub';
+var log = Log;
 
 let defaultPhases = [
 	"Initiative",

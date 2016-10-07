@@ -2,17 +2,15 @@
 
 var React = require('react');
 import { View, Image, Text } from 'react-native';
-var SpinNumeric = require('./widgets/spinNumeric');
-var IconButton = require('./widgets/iconButton');
-var Button = require('apsl-react-native-button');
-var Icons = require('./widgets/icons');
-var DiceRoll = require('./widgets/diceRoll');
+import {SpinNumeric,IconButton} from 'react-native-app-nub';
+import {DiceRoll} from 'react-native-dice';
+var Icons = require('./red/icons');
 var Initiative = require('./services/initiative');
 
 var InitiativeView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'red'},
-        {num: 1, low: 0, high: 9, color: 'blue'}
+        {num: 1, low: 0, high: 9, color: 'red', dotcolor:'white'},
+        {num: 1, low: 0, high: 9, color: 'blue', dotcolor:'white'}
     ],
     getInitialState() {
         return {
@@ -96,10 +94,10 @@ var InitiativeView = React.createClass({
                 </View>
                 <View style={{flex: 4,flexDirection: 'row'}}>
                     <View style={{flex: 1, marginRight: 5, alignItems: 'center'}}>
-                        <IconButton image={(this.state.initiative||'tie').toLowerCase()} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
+                        <IconButton image={Icons[(this.state.initiative||'tie').toLowerCase()]} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
                     </View>
                     <View style={{flex: 1, marginRight: 5}}>
-                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} onRoll={this.onDiceRoll} onDie={this.onDieChanged}/>
+                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'} onRoll={this.onDiceRoll} onDie={this.onDieChanged}/>
                     </View>
                 </View>
             </View>

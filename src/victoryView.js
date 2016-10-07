@@ -2,8 +2,8 @@
 
 var React = require('react');
 import { View, Image, Text } from 'react-native';
-var SpinNumeric = require('./widgets/spinNumeric');
-var Icons = require('./widgets/icons');
+import {SpinNumeric} from 'react-native-app-nub';
+var Icons = require('./res/icons');
 var Current = require('./services/current');
 var Melee = require('./services/melee');
 
@@ -13,9 +13,6 @@ let VictoryView = React.createClass({
     },
     componentDidMount: function() {
         this.props.events.addListener('reset', this.onReset);
-    },
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
     },
     onReset() {
         this.setState({mod: 0});

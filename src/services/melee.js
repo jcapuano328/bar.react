@@ -1,6 +1,7 @@
 'use strict'
+import {Log} from 'react-native-app-nub';
+var log = Log;
 let Current = require('./current');
-let log = require('./log');
 
 let results = {
 	'1-3': ['2/- (D Momentum)','AC/- (D Momentum)','1*/-','1/-','1/-','D/-','D/-','R/-','PIN','R/R','-/R','-/R','-/D (A Momentum)','-/D (A Momentum)'],
@@ -55,7 +56,7 @@ module.exports = {
 		let battle = Current.battle();
         return [{name: 'Tactical Leader', value: 0}].concat(battle.modifiers.melee.defend);
 	},
-    resolve(odds,attacknationality,attackmorale,attackleader,attackmods,defendnationality,defendmorale,defendleader,defendmods,combatdie,tacticaldie) {		
+    resolve(odds,attacknationality,attackmorale,attackleader,attackmods,defendnationality,defendmorale,defendleader,defendmods,combatdie,tacticaldie) {
 		let attackdrm = modifierDrm(attackmods, this.attackModifiers());
 		let defenddrm = modifierDrm(defendmods, this.defendModifiers());
 		let attacktacticalldr = attackmods.indexOf('Tactical Leader') > -1;

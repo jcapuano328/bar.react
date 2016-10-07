@@ -3,17 +3,16 @@
 var React = require('react');
 import { View, Image, Text } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-var SpinNumeric = require('./widgets/spinNumeric');
-var DiceRoll = require('./widgets/diceRoll');
-var Dice = require('./services/dice');
-var Icons = require('./widgets/icons');
+import {SpinNumeric} from 'react-native-app-nub';
+import {DiceRoll} from 'react-native-dice';
+var Icons = require('./res/icons');
 var Current = require('./services/current');
 var Morale = require('./services/morale');
 var Melee = require('./services/melee');
 
 let MoraleCheckView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'white'}
+        {num: 1, low: 0, high: 9, color: 'white',dotcolor:'black'}
     ],
     getInitialState() {
         return {
@@ -48,7 +47,7 @@ let MoraleCheckView = React.createClass({
         this.state.results = Morale.check(this.state.nationality,+this.state.unit,+this.state.leader,this.state.die1) ? 'pass' : 'fail';
         this.setState(this.state);
     },
-    render() {        
+    render() {
         let icon = this.state.results == 'fail' ? Icons['fail'] : Icons['pass'];
         return (
             <View style={{flex: 1}}>
@@ -100,7 +99,7 @@ let MoraleCheckView = React.createClass({
                         <Image style={{height: 64, width: 64, resizeMode: 'stretch', marginTop: 10}} source={icon} />
                     </View>
                     <View style={{flex: 1, marginRight: 15}}>
-                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]}
+                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
                             onRoll={this.onDiceRoll}
                             onDie={this.onDieChanged} />
                     </View>
@@ -108,7 +107,6 @@ let MoraleCheckView = React.createClass({
             </View>
         );
         //<Text style={{marginTop: 25, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
-
     }
 });
 

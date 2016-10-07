@@ -2,8 +2,8 @@
 
 var React = require('react');
 import { View, Text, Image, TouchableOpacity } from 'react-native';
-var SpinSelect = require('./widgets/spinSelect');
-var Icons = require('./widgets/icons');
+import {SpinSelect} from 'react-native-app-nub';
+var Icons = require('./res/icons');
 var Current = require('./services/current');
 
 var TurnView = React.createClass({
@@ -17,9 +17,6 @@ var TurnView = React.createClass({
     componentDidMount: function() {
         this.props.events.addListener('reset', this.onReset);
         this.props.events.addListener('initiativechange', this.onReset);
-    },
-    shouldComponentUpdate(nextProps, nextState) {
-        return true;
     },
     onReset() {
         this.setState({turn: Current.turn(), phase: Current.phase(), player: Current.player()});

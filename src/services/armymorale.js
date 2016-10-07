@@ -1,6 +1,6 @@
 'use strict'
-
-var log = require('./log.js');
+import {Log} from 'react-native-app-nub';
+var log = Log;
 
 function find(levels, morale) {
 	return levels.find((l) => {

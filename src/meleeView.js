@@ -1,20 +1,18 @@
 'use strict'
 
 var React = require('react');
-import { View, Image, Text, Picker } from 'react-native';
+import { View, Image, Text } from 'react-native';
 import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-var SpinNumeric = require('./widgets/spinNumeric');
-var MultiSelectList = require('./widgets/multiSelectList');
-var DiceRoll = require('./widgets/diceRoll');
-var Dice = require('./services/dice');
-var Icons = require('./widgets/icons');
+import {SpinNumeric,MultiSelectList,SelectDropdown} from 'react-native-app-nub';
+import {DiceRoll} from 'react-native-dice';
+var Icons = require('./res/icons');
 var Current = require('./services/current');
 var Melee = require('./services/melee');
 
 let MeleeView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'red'},
-        {num: 1, low: 0, high: 9, color: 'white'}
+        {num: 1, low: 0, high: 9, color: 'red', dotcolor:'white'},
+        {num: 1, low: 0, high: 9, color: 'white', dotcolor: 'black'}
     ],
     getInitialState() {
         return {
@@ -148,22 +146,15 @@ let MeleeView = React.createClass({
                     <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
                         <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
                             <Text style={{flex: 1, fontSize: 16,fontWeight: 'bold', marginLeft: 5, marginTop: 13}}>Odds</Text>
-                            <Picker style={{flex: 2, marginRight: 25}}
-                                selectedValue={this.state.odds}
-                                onValueChange={this.onOddsChanged}
-                            >
-                                {Melee.odds.map((o,i) => {
-                                    return (
-                                        <Picker.Item key={i} label={o} value={o} />
-                                    );
-                                })}
-                            </Picker>
+                            <View style={{flex: 2, marginRight: 25}}>
+                                <SelectDropdown values={Melee.odds} value={this.state.odds} onSelected={this.onOddsChanged} />
+                            </View>
                         </View>
                         <View style={{flex: 2, alignItems: 'flex-start', justifyContent: 'center'}}>
                             <Text style={{marginTop: 25, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
                         </View>
                         <View style={{flex: 1, marginRight: 5}}>
-                            <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]}
+                            <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
                                 onRoll={this.onDiceRoll}
                                 onDie={this.onDieChanged} />
                         </View>

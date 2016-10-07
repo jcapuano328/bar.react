@@ -2,18 +2,16 @@
 
 var React = require('react');
 import { View, Image, Text } from 'react-native';
-var SelectList = require('./widgets/selectList');
-var MultiSelectList = require('./widgets/multiSelectList');
-var DiceRoll = require('./widgets/diceRoll');
-var Dice = require('./services/dice');
-var Icons = require('./widgets/icons');
+import {SelectList,MultiSelectList} from 'react-native-app-nub';
+import {DiceRoll} from 'react-native-dice';
+var Icons = require('./res/icons');
 var Current = require('./services/current');
 var Fire = require('./services/fire');
 
 let FireView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'red'},
-        {num: 1, low: 0, high: 9, color: 'white'}
+        {num: 1, low: 0, high: 9, color: 'red', dotcolor:'white'},
+        {num: 1, low: 0, high: 9, color: 'white', dotcolor:'black'}
     ],
     getInitialState() {
         return {
@@ -103,7 +101,7 @@ let FireView = React.createClass({
                             }
                         </View>
                         <View style={{flex: 2, marginRight: 15}}>
-                            <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]}
+                            <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
                                 onRoll={this.onDiceRoll}
                                 onDie={this.onDieChanged} />
                         </View>
