@@ -4,7 +4,7 @@ var React = require('react');
 import { View, Image, Text } from 'react-native';
 import {SpinNumeric,IconButton} from 'react-native-app-nub';
 import {DiceRoll} from 'react-native-dice';
-var Icons = require('./red/icons');
+var Icons = require('./res/icons');
 var Initiative = require('./services/initiative');
 
 var InitiativeView = React.createClass({
