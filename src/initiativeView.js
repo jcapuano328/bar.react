@@ -92,7 +92,7 @@ var InitiativeView = React.createClass({
                         <View style={{flex:1}}/>
                     </View>
                 </View>
-                <View style={{flex: 4,flexDirection: 'row'}}>
+                <View style={{flex: 1,flexDirection: 'row', alignItems: 'center'}}>
                     <View style={{flex: 1, marginRight: 5, alignItems: 'center'}}>
                         <IconButton image={Icons[(this.state.initiative||'tie').toLowerCase()]} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
                     </View>
@@ -100,6 +100,7 @@ var InitiativeView = React.createClass({
                         <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'} onRoll={this.onDiceRoll} onDie={this.onDieChanged}/>
                     </View>
                 </View>
+                <View style={{flex:3}} />
             </View>
         );
         //<Text style={{flex: 2, fontSize: 28, fontWeight: 'bold', marginVertical: 20}}>{this.state.initiative}</Text>

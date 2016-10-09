@@ -2,8 +2,7 @@
 
 var React = require('react');
 import { View, Image, Text } from 'react-native';
-import RadioForm, {RadioButton, RadioButtonInput, RadioButtonLabel} from 'react-native-simple-radio-button';
-import {SpinNumeric,MultiSelectList,SelectDropdown} from 'react-native-app-nub';
+import {RadioButtonGroup,SpinNumeric,MultiSelectList,SelectDropdown} from 'react-native-app-nub';
 import {DiceRoll} from 'react-native-dice';
 var Icons = require('./res/icons');
 var Current = require('./services/current');
@@ -169,31 +168,16 @@ let MeleeInput = React.createClass({
     render() {
         return (
             <View style={{flex: 1, justifyContent: 'center', borderColor: 'gray', borderStyle: 'solid', borderLeftWidth: 1, borderRightWidth: 1}}>
-                <View style={{flex:.5, alignItems: 'center'}}>
+                <View style={{flex:.5, alignItems: 'center', backgroundColor:'silver'}}>
                     <Text>{this.props.label}</Text>
                 </View>
                 <View style={{flex:1, alignItems: 'center'}}>
-                    <RadioForm
-                      formHorizontal={true}
-                      animation={true}
-                    >
-                        {this.props.nationalities.map((n,i) => {
-                            return (
-                            <RadioButton labelHorizontal={true} key={i} >
-                              <RadioButtonInput
-                                obj={n}
-                                index={0}
-                                isSelected={this.props.nationality==n}
-                                onPress={this.props.onChangeNationality}
-                                borderWidth={1}
-                                buttonStyle={{}}
-                                buttonWrapStyle={{marginLeft: 10}}
-                              />
-                              <Image style={{marginLeft: 10, height: 48, width: 64, resizeMode: 'stretch'}} source={Icons[n.toLowerCase()]} />
-                            </RadioButton>
-                            );
+                    <RadioButtonGroup buttons={this.props.nationalities.map((n,i) => {
+                            return {image: Icons[n.toLowerCase()], imagepos:'right', imageheight:48, imagewidth:64, value: i};
                         })}
-                    </RadioForm>
+                        state={Melee.nationalities().indexOf(this.props.nationality)}
+                        onSelected={this.props.onChangeNationality}
+                    />
                 </View>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                     <View style={{flex:1, justifyContent: 'center'}}>

@@ -6,7 +6,7 @@
     "start": "node node_modules/react-native/local-cli/cli.js start",
     "debug": "node node_modules/react-native/local-cli/cli.js run-android",
     "get-js": "curl \"http://localhost:8081/index.android.bundle?platform=android&dev=false&minify=true\" -o \"android/app/src/main/assets/index.android.bundle\"",
-	"genkey": "keytool -genkey -v -keystore bar.keystore -alias bar -keyalg RSA -keysize 2048 -validity 10000",
+    "genkey": "keytool -genkey -v -keystore bar.keystore -alias bar -keyalg RSA -keysize 2048 -validity 10000",
     "build-rel": "cd android && gradlew assembleRelease && cd ..",
     "install-dbg": "adb -d install -r android/app/build/outputs/apk/bar-debug-1.1.apk",
     "install-rel": "adb -d install -r android/app/build/outputs/apk/bar-release-1.1.apk",
@@ -15,16 +15,15 @@
     "logs": "adb logcat *:S ReactNative:V ReactNativeJS:V"
   },
   "dependencies": {
-      "react-native-app-nub": "https://git@github.com/jcapuano328/react-native-app-nub.git",
-      "react-native-dice": "https://git@github.com/jcapuano328/react-native-dice.git",
-      "autobind-decorator": "^1.3.3",
-      "moment": "^2.14.1",
-      "react": "^15.3.2",
-      "react-native": "^0.34.0",
-      "react-native-audioplayer": "^0.2.0",
-      "react-native-fs": "^1.5.1",
-      "react-native-menu": "^0.20.1",
-      "react-native-scrollable-tab-view": "^0.5.4",
-      "react-native-simple-radio-button": "^2.2.0"
+    "autobind-decorator": "^1.3.3",
+    "moment": "^2.14.1",
+    "react": "^15.3.2",
+    "react-native": "^0.34.0",
+    "react-native-app-nub": "https://git@github.com/jcapuano328/react-native-app-nub.git",
+    "react-native-audioplayer": "^0.2.0",
+    "react-native-dice": "https://git@github.com/jcapuano328/react-native-dice.git",
+    "react-native-fs": "^1.5.1",
+    "react-native-menu": "^0.20.1",
+    "react-native-scrollable-tab-view": "^0.5.4"
   }
 }

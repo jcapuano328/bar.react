@@ -22,8 +22,9 @@ var GeneralView = React.createClass({
     },
     render() {
         return (
-            <View style={{flex: 1, marginTop: 5, marginRight: 125, justifyContent: 'flex-start', alignItems: 'center'}}>
+            <View style={{flex: 1, marginTop: 5, justifyContent: 'flex-start', alignItems: 'flex-end'}}>
                 <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2,this.state.die3]} type={'number'} onRoll={this.onDiceRoll} />
+                <View style={{flex:6}} />
             </View>
         );
     }

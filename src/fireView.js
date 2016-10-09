@@ -2,7 +2,7 @@
 
 var React = require('react');
 import { View, Image, Text } from 'react-native';
-import {SelectList,MultiSelectList} from 'react-native-app-nub';
+import {RadioButtonGroup,MultiSelectList} from 'react-native-app-nub';
 import {DiceRoll} from 'react-native-dice';
 var Icons = require('./res/icons');
 var Current = require('./services/current');
@@ -71,13 +71,22 @@ let FireView = React.createClass({
                 <View style={{flex: 4, flexDirection: 'row'}}>
                     <View style={{flex: 2, alignItems: 'center'}}>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch'}}>
-                            <SelectList title={'Type'} titleonly={true} items={Fire.types} selected={this.state.type} onChanged={this.onChangeType}/>
+                            <RadioButtonGroup title={'Type'} direction={'vertical'}
+                                buttons={Fire.types.map((t) => {return {label:t,value:t};})}
+                                state={this.state.type}
+                                onSelected={this.onChangeType}/>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch'}}>
-                            <SelectList title={'SPs'} titleonly={true} items={Fire.sps} selected={this.state.strength} onChanged={this.onChangeStrength}/>
+                            <RadioButtonGroup title={'SPs'} direction={'vertical'}
+                                buttons={Fire.sps.map((t) => {return {label:t,value:t};})}
+                                state={this.state.strength}
+                                onSelected={this.onChangeStrength}/>
                         </View>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch'}}>
-                            <SelectList title={'Range'} titleonly={true} items={Fire.ranges} selected={this.state.range} onChanged={this.onChangeRange}/>
+                            <RadioButtonGroup title={'Range'} direction={'vertical'}
+                                buttons={Fire.ranges.map((t) => {return {label:t,value:t};})}
+                                state={this.state.range}
+                                onSelected={this.onChangeRange}/>
                         </View>
                     </View>
                     <View style={{flex: 3, alignItems: 'flex-start'}}>
