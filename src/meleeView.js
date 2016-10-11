@@ -10,8 +10,8 @@ var Melee = require('./services/melee');
 
 let MeleeView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'red', dotcolor:'white'},
-        {num: 1, low: 0, high: 9, color: 'white', dotcolor: 'black'}
+        {num: 1, low: 0, high: 9, color: 'black', dotcolor:'red'},
+        {num: 1, low: 0, high: 9, color: 'black', dotcolor: 'white'}
     ],
     getInitialState() {
         return {
@@ -141,22 +141,28 @@ let MeleeView = React.createClass({
                         />
                     </View>
                 </View>
-                <View style={{flex: 1}}>
-                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
-                        <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
-                            <Text style={{flex: 1, fontSize: 16,fontWeight: 'bold', marginLeft: 5, marginTop: 13}}>Odds</Text>
-                            <View style={{flex: 2, marginRight: 25}}>
-                                <SelectDropdown values={Melee.odds} value={this.state.odds} onSelected={this.onOddsChanged} />
-                            </View>
+                <View style={{flex:.5}}>
+                    <RadioButtonGroup title={'Odds'} buttons={Melee.odds.map((o) => {return {label: o, value: o};})}
+                        state={this.state.odds}
+                        onSelected={this.onOddsChanged}
+                    />
+                </View>
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                    {/*
+                    <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
+                        <Text style={{flex: 1, fontSize: 16,fontWeight: 'bold', marginLeft: 5, marginTop: 13}}>Odds</Text>
+                        <View style={{flex: 2, marginRight: 25}}>
+                            <SelectDropdown values={Melee.odds} value={this.state.odds} onSelected={this.onOddsChanged} />
                         </View>
-                        <View style={{flex: 2, alignItems: 'flex-start', justifyContent: 'center'}}>
-                            <Text style={{marginTop: 25, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
-                        </View>
-                        <View style={{flex: 1, marginRight: 5}}>
-                            <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
-                                onRoll={this.onDiceRoll}
-                                onDie={this.onDieChanged} />
-                        </View>
+                    </View>
+                    */}
+                    <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{fontSize: 26, fontWeight: 'bold'}}>{this.state.results}</Text>
+                    </View>
+                    <View style={{flex: 1, marginRight: 5}}>
+                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
+                            onRoll={this.onDiceRoll}
+                            onDie={this.onDieChanged} />
                     </View>
                 </View>
             </View>
@@ -195,7 +201,7 @@ let MeleeInput = React.createClass({
                         <SpinNumeric value={this.props.leader} min={-5} max={5} onChanged={this.props.onChangeLeader} />
                     </View>
                 </View>
-                <View style={{flex: 7, alignSelf: 'stretch'}}>
+                <View style={{flex: 4.5, alignSelf: 'stretch'}}>
                     <MultiSelectList title={'Modifiers'} items={this.props.modifiers.map((m) => {return {name: m.name, selected: this.props.mods[m.name]};})} onChanged={this.props.onChangeMod}/>
                 </View>
             </View>

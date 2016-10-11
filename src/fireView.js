@@ -10,8 +10,8 @@ var Fire = require('./services/fire');
 
 let FireView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'red', dotcolor:'white'},
-        {num: 1, low: 0, high: 9, color: 'white', dotcolor:'black'}
+        {num: 1, low: 0, high: 9, color: 'black', dotcolor:'red'},
+        {num: 1, low: 0, high: 9, color: 'black', dotcolor: 'white'}
     ],
     getInitialState() {
         return {

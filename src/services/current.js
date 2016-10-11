@@ -55,7 +55,7 @@ module.exports = {
         var dt = moment(battle.startDateTime);
         var o = (_current.turn - 1) * TURN_MINS;
         dt.add(o, 'minutes');
-        return dt.format("MMM DD, YYYY hh:mm A");
+        return dt.format("MMM DD, YYYY HH:mm");
 	},
 	prevTurn(dosave) {
 		log.debug('prev turn: ' + _current.turn);

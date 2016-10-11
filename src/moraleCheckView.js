@@ -11,7 +11,7 @@ var Melee = require('./services/melee');
 
 let MoraleCheckView = React.createClass({
     dice: [
-        {num: 1, low: 0, high: 9, color: 'white',dotcolor:'black'}
+        {num: 1, low: 0, high: 9, color: 'green',dotcolor: 'white'}
     ],
     getInitialState() {
         return {

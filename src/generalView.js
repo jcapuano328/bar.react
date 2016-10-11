@@ -7,7 +7,7 @@ import {DiceRoll} from 'react-native-dice';
 var GeneralView = React.createClass({
     dice: [
         {num: 1, low: 0, high: 9, color: 'red', dotcolor:'white'},
-        {num: 1, low: 0, high: 9, color: 'white', dotcolor:'black'},
+        {num: 1, low: 0, high: 9, color: 'green', dotcolor: 'white'},
         {num: 1, low: 0, high: 9, color: 'blue', dotcolor:'white'}
     ],
     getInitialState() {
