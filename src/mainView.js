@@ -78,7 +78,6 @@ var MainView = React.createClass({
         }
     },
     onReset() {
-        log.debug('reset');
         this.eventEmitter.emit('menureset');
     },
     onAbout() {
@@ -86,7 +85,6 @@ var MainView = React.createClass({
     },
     renderScene(route, navigator) {
         route = route || {};
-        log.debug('render scene ' + route.name);
         if (route.name == 'battle') {
             this.state.routes.battle.title = route.data.name;
             this.state.routes.battle.subtitle = route.data.desc;

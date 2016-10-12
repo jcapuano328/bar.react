@@ -58,7 +58,6 @@ module.exports = {
         return dt.format("MMM DD, YYYY HH:mm");
 	},
 	prevTurn(dosave) {
-		log.debug('prev turn: ' + _current.turn);
 		if (--_current.turn < 1) {
 			_current.turn = 1;
 		}
@@ -74,9 +73,7 @@ module.exports = {
         });
 	},
 	nextTurn(dosave) {
-		log.debug('next turn: ' + _current.turn);
 		var maxturns = this.battle().turns;
-		log.debug('max turns: ' + maxturns);
 		if (++_current.turn >= maxturns) {
 			_current.turn = maxturns;
 		}
@@ -92,9 +89,7 @@ module.exports = {
         });
 	},
 	phase() {
-		let phase = Phases.get(_current.phase, _current.initiative);
-		log.debug('phase: ' + phase);
-		return phase;
+		return Phases.get(_current.phase, _current.initiative);
 	},
 	prevPhase() {
 		if (--_current.phase < 0) {
@@ -121,6 +116,7 @@ module.exports = {
 				_current.player = 'second';
 			}
 		}
+		console.log(_current);
     	return this.save()
         .then(() => {
         	return this.phase();

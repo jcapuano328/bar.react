@@ -18,7 +18,6 @@ module.exports = {
 
     status(levels, morale) {
     	let level = find(levels, morale);
-        log.debug('Status: ' + level.name);
 		return level.name || 'high';
     },
 
