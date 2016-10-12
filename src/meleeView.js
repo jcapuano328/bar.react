@@ -144,7 +144,7 @@ let MeleeView = React.createClass({
                 <View style={{flex:.5}}>
                     <RadioButtonGroup title={'Odds'} buttons={Melee.odds.map((o) => {return {label: o, value: o};})}
                         state={this.state.odds}
-                        onSelected={this.onOddsChanged}
+                        onSelected={this.onChangeOdds}
                     />
                 </View>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
@@ -178,10 +178,10 @@ let MeleeInput = React.createClass({
                     <Text>{this.props.label}</Text>
                 </View>
                 <View style={{flex:1, alignItems: 'center'}}>
-                    <RadioButtonGroup buttons={this.props.nationalities.map((n,i) => {
-                            return {image: Icons[n.toLowerCase()], imagepos:'right', imageheight:48, imagewidth:64, value: i};
+                    <RadioButtonGroup buttons={this.props.nationalities.map((n) => {
+                            return {image: Icons[n.toLowerCase()], imagepos:'right', imageheight:48, imagewidth:64, value: n};
                         })}
-                        state={Melee.nationalities().indexOf(this.props.nationality)}
+                        state={this.props.nationality}
                         onSelected={this.props.onChangeNationality}
                     />
                 </View>
