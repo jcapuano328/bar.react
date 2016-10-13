@@ -489,20 +489,20 @@
 			"Initiative",
             {
             	"American": [
-                	"American. Movement",
-                    "American. Rally",
-                    "American. Rifle Fire",
-                    "American. Close Combat"
+                	"Movement",
+                    "Rally",
+                    "Rifle Fire",
+                    "Close Combat"
 				],
             	"Indian": [
-                    "Indian. Standard Movement",
-					"Indian. Activation Movement",
-					"Indian. Rally",
-					"American. Def Arty Fire",
-					"Indian. Rifle Fire",
-					"Indian. Close Combat",
-					"Indian. Final Movement",
-					"Indian. End"
+                    "Standard Movement",
+					"Activation Movement",
+					"Rally",
+					"Def Arty Fire",
+					"Rifle Fire",
+					"Close Combat",
+					"Final Movement",
+					"End"
 				]
 			},
 			"End of Turn"

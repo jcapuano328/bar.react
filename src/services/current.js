@@ -28,12 +28,13 @@ module.exports = {
 		});
 	},
 	reset(data) {
+		let nationalities = this.nationalities(data.id);
 		let blank = {
 		    battle: data.id,
 		    turn: 1,
 		    phase: 0,
-		    player: 'first',
-		    initiative: '',
+		    player: nationalities[0],
+		    initiative: nationalities[0],
 		    britishMorale: data.startBritishMorale,
 		    americanMorale: data.startAmericanMorale,
 		    frenchMorale: data.startFrenchMorale,
@@ -49,6 +50,10 @@ module.exports = {
 	},
 	battle() {
 		return Battles.get((_current||{}).battle) || {};
+	},
+	nationalities(id) {
+		let battle = id ? Battles.get(id) : this.battle();
+		return battle.nationalities || ['British', 'American'];
 	},
 	turn() {
 		let battle = this.battle();
@@ -68,9 +73,7 @@ module.exports = {
             	return turn;
 			});
 		}
-        return new Promise((resolve, reject) => {
-        	resolve(turn);
-        });
+        //return new Promise((resolve, reject) => resolve(turn));
 	},
 	nextTurn(dosave) {
 		var maxturns = this.battle().turns;
@@ -84,54 +87,71 @@ module.exports = {
             	return turn;
 			});
 		}
-        return new Promise((resolve, reject) => {
-        	resolve(turn);
-        });
+        //return new Promise((resolve, reject) => resolve(turn));
 	},
 	phase() {
-		return Phases.get(_current.phase, _current.initiative);
+		return Phases.get(_current.phase, _current.player);
 	},
 	prevPhase() {
-		if (--_current.phase < 0) {
-			_current.phase = Phases.length(_current.initiative) - 1;
-			if (_current.player == 'first') {
-				this.prevTurn(false);
-				_current.player = 'second';
-			} else {
-				_current.player = 'first';
-			}
+		//console.log('<<<< Prev Phase ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
+		if (--_current.phase < 0 && this.isInitiativePlayer()) {
+			// move to previous turn
+			this.prevTurn(false);
+			// and previous player
+			this.nextPlayer(false);
+			_current.phase = Phases.lengthall(_current.player) - 1;
+		} else if (_current.phase < 1 && !this.isInitiativePlayer()) {
+			// move to previous player
+			this.nextPlayer(false);
+			_current.phase = Phases.length(_current.player);
 		}
+		//console.log('             -> ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
     	return this.save()
         .then(() => {
         	return this.phase();
 		});
 	},
 	nextPhase() {
-		if (++_current.phase >= Phases.length(_current.initiative)) {
+		//console.log('>>>> Next Phase ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
+		if (++_current.phase > Phases.length(_current.player) && this.isInitiativePlayer()) {
+			// move to next player
+			this.nextPlayer(false);
+			_current.phase = 1;
+		} else if (_current.phase >= Phases.lengthall(_current.player)) {
+			// move to next turn
+			this.nextTurn(false);
+			// and next player
+			this.nextPlayer(false);
 			_current.phase = 0;
-			if (_current.player == 'second') {
-				this.nextTurn(false);
-				_current.player = 'first';
-			} else {
-				_current.player = 'second';
-			}
 		}
-		console.log(_current);
+		//console.log('             -> ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
     	return this.save()
         .then(() => {
         	return this.phase();
 		});
 	},
-	nextPlayer() {
-		if (_current.player == 'second') {
-			_current.player = 'first';
+	nextPlayer(dosave) {
+		let nationalities = this.nationalities();
+		if (this.isFirstPlayer(_current.player, nationalities)) {
+			_current.player = nationalities[1];
 		} else {
-			_current.player = 'second';
+			_current.player = nationalities[0];
 		}
-		return this.save()
-        .then(() => {
-        	return this.player();
-		});
+		if (dosave) {
+        	return this.save()
+            .then(() => {
+            	return this.player();
+			});
+		}
+        //return new Promise((resolve, reject) => resolve(turn));
+	},
+	isInitiativePlayer() {
+		return _current.player == _current.initiative;
+	},
+	isFirstPlayer(player,nationalities) {
+		player = player || _current.player;
+		nationalities = nationalities || this.nationalities();
+		return (nationalities.indexOf(player) == 0);
 	},
 	player(v) {
 		if (typeof v != 'undefined') {

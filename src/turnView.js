@@ -55,7 +55,7 @@ var TurnView = React.createClass({
     },
     onNextPlayer() {
         //console.log('next player');
-        Current.nextPlayer()
+        Current.nextPlayer(true)
         .then((player) => {
             this.setState({player: player});
         })
@@ -63,7 +63,6 @@ var TurnView = React.createClass({
     },
     render() {
         //console.log(this.props);
-        console.log(this.state.player);
         return (
             <View style={{flexDirection: 'row', height: 90, marginTop: 60, marginLeft: 10, marginRight: 10}}>
                 <View style={{flex: 1}}>

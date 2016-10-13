@@ -95,6 +95,7 @@ var MainView = React.createClass({
 
         if (route.name == 'about') {
             return (
+                <View style={{flex:1,marginTop:30}}>
                 <AboutView logo={Icons.logo}
                     title={'About BAR Assistant'}
                     version={this.state.version}
@@ -103,13 +104,13 @@ var MainView = React.createClass({
                     credit={{
                         description: 'All glory to them that made it possible!',
                         links: [
-                            {label: 'GMT Games', url: ''}
+                            {label: 'GMT Games', url: 'http://www.gmtgames.com/c-3-battles-of-the-american-revolution.aspx'}
                         ]
                     }}
                     additionalinfo={{
                         description: 'And of course check out the discussions and extras',
                         links: [
-                            {label: 'ConsimWorld Forum', url: ''},
+                            {label: 'ConsimWorld Forum', url: 'http://talk.consimworld.com/WebX/.ee6d708/9280'},
                             {label: 'BAR Extras', url: ''}
                         ]
                     }}
@@ -122,6 +123,7 @@ var MainView = React.createClass({
                     ]}
                     events={this.eventEmitter} onClose={() => {navigator.pop();}}
                 />
+                </View>
             );
         }
 

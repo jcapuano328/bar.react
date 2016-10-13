@@ -1,74 +1,60 @@
 'use strict'
-import {Log} from 'react-native-app-nub';
-var log = Log;
+//var log = require('react-native-app-nub').Log;
 
 let defaultPhases = [
 	"Initiative",
     {
     	"American": [
-        	"American. Movement",
-            "American. Rally",
-			"British. Def Arty Fire",
-            "American. Rifle Fire",
-            "American. Close Combat"
+        	"Movement",
+            "Rally",
+			"Def Arty Fire",
+            "Rifle Fire",
+            "Close Combat"
 		],
     	"British": [
-            "British. Movement",
-			"British. Rally",
-			"American. Def Arty Fire",
-			"British. Rifle Fire",
-			"British. Close Combat"
+            "Movement",
+			"Rally",
+			"Def Arty Fire",
+			"Rifle Fire",
+			"Close Combat"
 		]
 	},
 	"End of Turn"
 ];
 
-let phases = defaultPhases;
+let getNationalityPhases = (phases, nationality) => {
+	let nphases = [];
+	phases.forEach((p) => {
+		if (typeof p == 'object' && p.hasOwnProperty(nationality)) {
+			nphases = p[nationality];
+		}
+	});
+	return nphases;
+}
+
+let getAllPhases = (phases, nationality) => {
+	return phases.slice(0,1).concat(getNationalityPhases(phases,nationality), phases.slice(phases.length-1,phases.length));
+}
 
 module.exports = {
-	length() {
-    	var count = 0;
-        phases.forEach((phase) => {
-        	if (typeof phase == 'string') {
-            	count++;
-            }
-            else if (typeof phase == 'object') {
-            	for (var nationality in phase) {
-	            	count += phase[nationality].length || 0;
-                }
-            }
-        });
-        return count;
-	},
-    init(battle) {
-    	phases = battle.phases || defaultPhases;
+	phases: defaultPhases,
+	init(battle) {
+    	this.phases = battle.phases || defaultPhases;
     },
-	all(nationality) {
-    	var l = phases.slice(0,1);
-
-        var nat = [];
-        var othernat = [];
-        phases.forEach(function(phase) {
-            if (typeof phase == 'object') {
-            	for (var n in phase) {
-                	if (n == nationality) {
-                    	nat = phase[n];
-                    } else if (n != nationality) {
-                    	othernat = phase[n];
-                    }
-                }
-            }
-        });
-        l = l.concat(nat, othernat, phases[phases.length - 1]);
-
-        return l;
-    },
-    get(idx, nationality) {
-    	log.debug('Get Phase [' + idx + '] for ' + nationality);
-        var l = this.all(nationality);
+	get(idx, nationality) {
+    	//console.log('Get Phase [' + idx + '] for ' + nationality);
+		let l = getAllPhases(this.phases,nationality);
     	if (idx > -1 && idx < l.length) {
         	return l[idx];
         }
-        return phases[0];
-    }
+        return l[0];
+    },
+	lengthall(nationality) {
+		let l = getAllPhases(this.phases,nationality);
+		return l.length;
+	},
+	length(nationality) {
+		let l = getNationalityPhases(this.phases,nationality);
+		return l.length;
+	}
 };

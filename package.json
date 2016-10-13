@@ -25,5 +25,12 @@
     "react-native-fs": "^1.5.1",
     "react-native-menu": "^0.20.1",
     "react-native-scrollable-tab-view": "^0.5.4"
+  },
+  "devDependencies": {
+    "chai": "^3.5.0",
+    "mocha": "^3.1.2",
+    "sandboxed-module": "^2.0.3",
+    "sinon": "^1.17.6",
+    "sinon-chai": "^2.8.0"
   }
 }

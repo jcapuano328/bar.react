@@ -2,7 +2,7 @@
     battle: 1,
     turn: 1,
     phase: 0,
-    player: 'first',
+    player: '',
     initiative: '',
     britishMorale: 0,
     americanMorale: 0,
