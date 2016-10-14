@@ -16,8 +16,8 @@ let MoraleCheckView = React.createClass({
     getInitialState() {
         return {
             nationality: Melee.nationalities()[0],
-            unit: '0',
-            leader: '0',
+            unit: 0,
+            leader: 0,
             results: '',
             die1: 0
         };
@@ -58,16 +58,31 @@ let MoraleCheckView = React.createClass({
                         onSelected={this.onChangeNationality}
                     />
                 </View>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 3, flexDirection: 'row', alignItems: 'center'}}>
                     <View style={{flex:1}}/>
+                    {/*
                     <View style={{flex:1, justifyContent: 'center'}}>
                         <Text style={{marginLeft: 10}}>Unit</Text>
                     </View>
                     <View style={{flex:2, alignItems: 'center'}}>
                         <SpinNumeric value={this.state.unit} min={-5} max={5} onChanged={this.onChangeUnit} />
                     </View>
+                    */}
+                    <View style={{flex:2, borderRightWidth:1,borderRightColor:'gray'}}>
+                        <RadioButtonGroup title={'Unit'} direction={'vertical'} buttons={[-2,-1,0,1,2].map((m) => {return {label: m.toString(), value: m};})}
+                            state={this.state.unit}
+                            onSelected={this.onChangeUnit}
+                        />
+                    </View>
+                    <View style={{flex:2}}>
+                        <RadioButtonGroup title={'Leader'} direction={'vertical'} buttons={[0,1,2,3,4,5,6].map((l) => {return {label: l.toString(), value: l};})}
+                            state={this.state.leader}
+                            onSelected={this.onChangeLeader}
+                        />
+                    </View>
                     <View style={{flex:1}}/>
                 </View>
+                {/*
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                     <View style={{flex:1}}/>
                     <View style={{flex:1, justifyContent: 'center'}}>
@@ -78,8 +93,11 @@ let MoraleCheckView = React.createClass({
                     </View>
                     <View style={{flex:1}}/>
                 </View>
-                <View style={{flex: 6, flexDirection: 'row', alignItems: 'flex-start'}}>
+                */}
+                <View style={{flex:2}}/>
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke'}}>
                     <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
+                        {/*<Text style={{marginTop: 25, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>*/}
                         <Image style={{height: 64, width: 64, resizeMode: 'stretch', marginTop: 10}} source={icon} />
                     </View>
                     <View style={{flex: 1, marginRight: 15}}>
@@ -90,7 +108,6 @@ let MoraleCheckView = React.createClass({
                 </View>
             </View>
         );
-        //<Text style={{marginTop: 25, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
     }
 });
 

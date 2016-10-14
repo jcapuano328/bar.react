@@ -147,7 +147,7 @@ let MeleeView = React.createClass({
                         onSelected={this.onChangeOdds}
                     />
                 </View>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke'}}>
                     {/*
                     <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
                         <Text style={{flex: 1, fontSize: 16,fontWeight: 'bold', marginLeft: 5, marginTop: 13}}>Odds</Text>
@@ -175,7 +175,7 @@ let MeleeInput = React.createClass({
         return (
             <View style={{flex: 1, justifyContent: 'center', borderColor: 'gray', borderStyle: 'solid', borderLeftWidth: 1, borderRightWidth: 1}}>
                 <View style={{flex:.5, alignItems: 'center', backgroundColor:'silver'}}>
-                    <Text>{this.props.label}</Text>
+                    <Text style={{fontSize: 18, fontWeight:'bold'}}>{this.props.label}</Text>
                 </View>
                 <View style={{flex:1, alignItems: 'center'}}>
                     <RadioButtonGroup buttons={this.props.nationalities.map((n) => {
@@ -186,20 +186,32 @@ let MeleeInput = React.createClass({
                     />
                 </View>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                    {/*
                     <View style={{flex:1, justifyContent: 'center'}}>
                         <Text style={{marginLeft: 10}}>Morale</Text>
                     </View>
                     <View style={{flex:2, alignItems: 'center'}}>
                         <SpinNumeric value={this.props.morale} min={-5} max={5} onChanged={this.props.onChangeMorale} />
                     </View>
+                    */}
+                    <RadioButtonGroup title={'Morale'} buttons={[-2,-1,0,1,2].map((m) => {return {label: m.toString(), value: m.toString()};})}
+                        state={this.props.morale}
+                        onSelected={this.props.onChangeMorale}
+                    />
                 </View>
                 <View style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
+                    {/*
                     <View style={{flex:1, justifyContent: 'center'}}>
                         <Text style={{marginLeft: 10}}>Leader</Text>
                     </View>
                     <View style={{flex:2, alignItems: 'center'}}>
                         <SpinNumeric value={this.props.leader} min={-5} max={5} onChanged={this.props.onChangeLeader} />
                     </View>
+                    */}
+                    <RadioButtonGroup title={'Leader'} buttons={[0,1,2,3,4].map((m) => {return {label: m.toString(), value: m.toString()};})}
+                        state={this.props.leader}
+                        onSelected={this.props.onChangeLeader}
+                    />
                 </View>
                 <View style={{flex: 4.5, alignSelf: 'stretch'}}>
                     <MultiSelectList title={'Modifiers'} items={this.props.modifiers.map((m) => {return {name: m.name, selected: this.props.mods[m.name]};})} onChanged={this.props.onChangeMod}/>

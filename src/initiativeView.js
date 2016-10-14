@@ -92,7 +92,7 @@ var InitiativeView = React.createClass({
                         <View style={{flex:1}}/>
                     </View>
                 </View>
-                <View style={{flex: 1,flexDirection: 'row', alignItems: 'center'}}>
+                <View style={{flex: 1,flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke'}}>
                     <View style={{flex: 1, marginRight: 5, alignItems: 'center'}}>
                         <IconButton image={Icons[(this.state.initiative||'tie').toLowerCase()]} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
                     </View>

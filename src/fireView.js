@@ -95,7 +95,7 @@ let FireView = React.createClass({
                         </View>
                     </View>
                 </View>
-                <View style={{flex: 1}}>
+                <View style={{flex: 1, backgroundColor:'whitesmoke'}}>
                     <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
                         <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
                             {Icons[result]

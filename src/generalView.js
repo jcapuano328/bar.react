@@ -12,9 +12,9 @@ var GeneralView = React.createClass({
     ],
     getInitialState() {
         return {
-            die1: 1,
-            die2: 1,
-            die3: 1
+            die1: 0,
+            die2: 0,
+            die3: 0
         };
     },
     onDiceRoll(d) {
