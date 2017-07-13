@@ -1,0 +1,584 @@
+[
+	{
+    	"id": 1,
+    	"name": "Saratoga",
+    	"desc": "Turning Point of the Revolution",
+        "image": "saratoga",
+        "volume": 1,
+        "turns": 12,
+        "moraleLevels": [
+            {
+            	"name": "high",
+                "high": 15,
+            	"low": 11
+            },
+            {
+            	"name": "fatigued",
+                "high": 10,
+            	"low": 5
+            },
+            {
+            	"name": "wavering",
+                "high": 4,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Forest", "value": -1},
+            	{"name": "Fieldworks", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Mounted Dragoon", "value": 1},
+            	{"name": "Rifle first volley", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Rifle", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Dragoon vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender all American militia", "value": 1},
+	            	{"name": "Defender all British auxiliary", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker Rifle", "value": -1},
+	            	{"name": "Attacker all American militia", "value": -1},
+	            	{"name": "Attacker all British auxiliary", "value": -1},
+	            	{"name": "Attacker all across creek", "value": -1},
+	            	{"name": "Attacker all across fieldworks", "value": -1},
+	            	{"name": "Attacker all up slope", "value": -1},
+	            	{"name": "Attacker all across ravine", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1}
+	            ]
+            }
+        },
+    	"startDateTime": "1777-09-19T08:00:00-04:00",
+    	"startBritishMorale": 14,
+        "startAmericanMorale": 14
+    },
+	{
+    	"id": 2,
+    	"name": "Brandywine",
+    	"desc": "One Bold Stroke",
+        "image": "brandywine",
+        "volume": 2,
+        "turns": 12,
+        "moraleLevels": [
+            {
+            	"name": "high",
+                "high": 21,
+            	"low": 15
+            },
+            {
+            	"name": "fatigued",
+                "high": 14,
+            	"low": 6
+            },
+            {
+            	"name": "wavering",
+                "high": 5,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Forest", "value": -1},
+            	{"name": "Fieldworks", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Dragoon", "value": 1},
+            	{"name": "Ferguson's Rifles", "value": 1},
+            	{"name": "Rifle first volley", "value": 1},
+            	{"name": "Defender in Meeting House", "value": -2}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Rifle", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Dragoon vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender all American militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker Rifle", "value": -1},
+	            	{"name": "Attacker all American militia", "value": -1},
+	            	{"name": "Attacker all across run/up slope", "value": -1},
+	            	{"name": "Attacker all across fieldworks", "value": -1},
+	            	{"name": "Attacker across non-ford Brandywine Creek", "value": -1},
+	            	{"name": "Defender in Meeting House", "value": -1},
+	            	{"name": "Defender in town", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1}
+	            ]
+            }
+        },
+
+        "startDateTime": "1777-09-11T08:00:00-04:00",
+    	"startBritishMorale": 20,
+        "startAmericanMorale": 20
+    },
+	{
+    	"id": 3,
+    	"name": "Guilford Courthouse",
+    	"desc": "High Water Mark of the Southern Campaign",
+        "image": "guilford",
+        "volume": 3,
+        "turns": 13,
+        "moraleLevels": [
+            {
+        		"name": "high",
+                "high": 15,
+            	"low": 11
+            },
+            {
+        		"name": "fatigued",
+                "high": 10,
+            	"low": 5
+            },
+            {
+        		"name": "wavering",
+                "high": 4,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Forest/Lt Forest", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Mounted Dragoon", "value": 1},
+            	{"name": "Rifle first volley", "value": 1},
+            	{"name": "Meeting House", "value": -1},
+            	{"name": "Guilford CH", "value": -1},
+            	{"name": "McCuiston PH", "value": -1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Rifle", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Dragoon vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender all American militia", "value": 1},
+	            	{"name": "Defender all British militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker Rifle", "value": -1},
+	            	{"name": "Attacker all American militia", "value": -1},
+	            	{"name": "Attacker all British militia", "value": -1},
+	            	{"name": "Attacker all across creek", "value": -1},
+	            	{"name": "Attacker all up slope", "value": -1},
+	            	{"name": "Attacker all across ravine", "value": -2},
+                    {"name": "Meeting House", "value": -1},
+                    {"name": "Guilford CH", "value": -1},
+                    {"name": "McCuiston PH", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1}
+	            ]
+            }
+        },
+    	"startDateTime": "1781-03-15T06:00:00-04:00",
+    	"startBritishMorale": 14,
+        "startAmericanMorale": 14
+    },
+	{
+    	"id": 31,
+    	"name": "Eutaw Springs",
+    	"desc": "",
+        "image": "guilford",
+        "volume": 3.1,
+        "turns": 10,
+        "moraleLevels": [
+            {
+            	"name": "high",
+                "high": 15,
+            	"low": 11
+            },
+            {
+            	"name": "fatigued",
+                "high": 10,
+            	"low": 5
+            },
+            {
+            	"name": "wavering",
+                "high": 4,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Forest/Lt Forest", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Mounted Dragoon", "value": 1},
+            	{"name": "Rifle first volley", "value": 1},
+            	{"name": "Wantoot PH", "value": -2},
+            	{"name": "Santee River (vs Swamp Fox)", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Rifle", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Dragoon vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender all American militia", "value": 1},
+	            	{"name": "Defender all British militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1},
+	            	{"name": "Defender at Nelson's Ferry", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker Rifle", "value": -1},
+	            	{"name": "Attacker all American militia", "value": -1},
+	            	{"name": "Attacker all British militia", "value": -1},
+	            	{"name": "Attacker all across creek", "value": -1},
+	            	{"name": "Attacker all up slope", "value": -1},
+	            	{"name": "Attacker all across ravine", "value": -2},
+                    {"name": "Wantoot PH", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1},
+	            	{"name": "Swamp Fox in swamp", "value": -1}
+	            ]
+            }
+        },
+        "startDateTime": "1781-09-08T07:00:00-04:00",
+    	"startBritishMorale": 13,
+        "startAmericanMorale": 14
+    },
+	{
+    	"id": 4,
+    	"name": "Savannah",
+    	"desc": "1779",
+        "image": "savannah",
+        "volume": 4,
+        "turns": 10,
+        "moraleLevels": [
+            {
+        		"name": "high",
+                "high": 20,
+            	"low": 11
+            },
+            {
+        		"name": "fatigued",
+                "high": 10,
+            	"low": 5
+            },
+            {
+        		"name": "wavering",
+                "high": 4,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Forest/Lt Forest/City/Covered Way", "value": -1},
+            	{"name": "Redoubt/Revetment/Siege Works/Dyke", "value": -1},
+            	{"name": "Squall/Storms/Heavy Rain", "value": -1},
+            	{"name": "Fog", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Mounted Dragoon", "value": 1},
+            	{"name": "Rice field/Causeway", "value": 1},
+            	{"name": "Mortar first fire", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Incomplete British Defenses (a)", "value": 2},
+	            	{"name": "Incomplete British Defenses (b)", "value": 1},
+	            	{"name": "British attacking Franco-Americans", "value": 1},
+	            	{"name": "Allied Cavalry vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Irish ferocity", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender in swamp", "value": 1},
+	            	{"name": "Defender on causeway", "value": 1},
+	            	{"name": "Defender all militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Defender occupies non-destroyed Savannah", "value": -2},
+	            	{"name": "British force Franco-American to attack", "value": -2},
+	            	{"name": "Gale", "value": -2},
+	            	{"name": "Squall", "value": -1},
+	            	{"name": "British force French regulars and American militia to attack", "value": -1},
+	            	{"name": "Defender occupies Covered Way", "value": -1},
+	            	{"name": "Defender occupies Old Savannah Fort", "value": -1},
+	            	{"name": "Attack across Dyke/Stream/Up Slope/Bridge/Ford", "value": -1},
+	            	{"name": "Attack into fieldworks", "value": -1},
+	            	{"name": "Attacker all militia", "value": -1},
+	            	{"name": "Creek Indians defending alone", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1}
+	            ]
+            }
+        },
+    	"startDateTime": "1779-10-09T05:30:00-04:00",
+    	"startBritishMorale": 19,
+        "startAmericanMorale": 18,
+        "startFrenchMorale": 17
+    },
+
+	{
+    	"id": 5,
+    	"name": "Monmouth Courthouse",
+    	"desc": "The Longest Battle",
+        "image": "monmouth",
+        "volume": 5,
+        "turns": 14,
+        "moraleLevels": [
+            {
+            	"name": "high",
+                "high": 21,
+            	"low": 16
+            },
+            {
+            	"name": "fatigued",
+                "high": 15,
+            	"low": 6
+            },
+            {
+            	"name": "wavering",
+                "high": 5,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Woods/Heavy Woods/Orchard", "value": -1},
+            	{"name": "Village", "value": -1},
+            	{"name": "All across Morass", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Mounted Cavalry", "value": 1},
+            	{"name": "Rifle first volley", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Dragoon vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender in swamp", "value": 1},
+	            	{"name": "Defender all American militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker all across brook", "value": -1},
+	            	{"name": "Attacker all up slope", "value": -1},
+	            	{"name": "Attacker infantry all across hedgerow", "value": -1},
+	            	{"name": "Attacker cavalry all across hedgerow", "value": -2},
+	            	{"name": "Attacker all across morass", "value": -2},
+	            	{"name": "Attacker all American militia", "value": -1},
+	            	{"name": "Defender suffering C&C", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1}
+	            ]
+            }
+        },
+        "startDateTime": "1778-06-28T06:00:00-04:00",
+        "startBritishMorale": 20,
+        "startAmericanMorale": 20
+    },
+	{
+    	"id": 6,
+    	"name": "Germantown",
+    	"desc": "Washington Strikes Back!",
+        "image": "germantown",
+        "volume": 7,
+        "turns": 10,
+        "moraleLevels": [
+        	{
+            	"name": "high",
+                "high": 15,
+            	"low": 11
+            },
+        	{
+            	"name": "fatigued",
+                "high": 10,
+            	"low": 5
+            },
+            {
+            	"name": "wavering",
+                "high": 4,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry", "value": -1},
+            	{"name": "Light Woods/Heavy Woods/Orchard", "value": -1},
+            	{"name": "Village", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Mounted Cavalry", "value": 1},
+            	{"name": "Chew House", "value": -3},
+            	{"name": "Fieldworks", "value": -1},
+            	{"name": "Rifle first volley", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Cavalry vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender in swamp", "value": 1},
+	            	{"name": "Defender all militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1},
+	            	{"name": "Wayne's fury", "value": 1},
+	            	{"name": "American surprise", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker all across creek/stream/slope", "value": -1},
+	            	{"name": "Attacker all across fieldworks", "value": -1},
+	            	{"name": "Chew House", "value": -2},
+	            	{"name": "Attacker all militia", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1}
+	            ]
+            }
+        },
+        "startDateTime": "1777-10-04T05:20:00-04:00",
+        "startBritishMorale": 14,
+        "startAmericanMorale": 13
+    },
+	{
+    	"id": 7,
+    	"name": "Newtown",
+    	"desc": "Battles with the Iroquis Confederacy",
+        "image": "newtown",
+        "volume": 8,
+        "turns": 12,
+        "nationalities": ["Indian", "American"],
+        "moraleLevels": [
+        	{
+            	"name": "high",
+                "high": 15,
+            	"low": 10
+            },
+        	{
+            	"name": "fatigued",
+                "high": 9,
+            	"low": 5
+            },
+            {
+            	"name": "wavering",
+                "high": 4,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Lt Infantry/Indians", "value": -1},
+            	{"name": "Light Woods/Heavy Woods/Orchard", "value": -1},
+            	{"name": "Fortification", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Cavalry", "value": 1},
+            	{"name": "Artillery at Indians", "value": 3},
+            	{"name": "Rifle first volley", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Rifle", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Cavalry vs Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender in swamp", "value": 1},
+	            	{"name": "Defender all militia", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1},
+	            	{"name": "Indian ferocity", "value": 1},
+	            	{"name": "Indian defenders with Failed Resolve", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker Rifle", "value": -1},
+	            	{"name": "Attacker all across stream/up slope", "value": -1},
+	            	{"name": "Attacker all mountain slope", "value": -2},
+	            	{"name": "Attacker all across breastworks", "value": -1},
+	            	{"name": "Attacker all militia", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1},
+	            	{"name": "Indian ferocity", "value": -1},
+	            	{"name": "Seneca defending in Newtown", "value": -1}
+	            ]
+            }
+        },
+        "phases": [
+			"Initiative",
+            {
+            	"American": [
+                	"Movement",
+                    "Rally",
+                    "Rifle Fire",
+                    "Close Combat"
+				],
+            	"Indian": [
+                    "Standard Movement",
+					"Activation Movement",
+					"Rally",
+					"Def Arty Fire",
+					"Rifle Fire",
+					"Close Combat",
+					"Final Movement",
+					"End"
+				]
+			},
+			"End of Turn"
+        ],
+        "startDateTime": "1779-08-29T08:00:00-04:00",
+        "startBritishMorale": 13,
+        "startAmericanMorale": 14
+    },
+	{
+    	"id": 8,
+    	"name": "Oriskany",
+    	"desc": "Battles with the Iroquis Confederacy",
+        "image": "newtown",
+        "volume": 8.1,
+        "turns": 14,
+        "moraleLevels": [
+        	{
+            	"name": "high",
+                "high": 15,
+            	"low": 10
+            },
+            {
+            	"name": "fatigued",
+                "high": 9,
+            	"low": 3
+            },
+            {
+            	"name": "wavering",
+                "high": 2,
+            	"low": 1
+            }
+        ],
+        "modifiers": {
+        	"fire": [
+            	{"name": "Fort Stanwix", "value": -2},
+            	{"name": "Light Woods/Heavy Woods/Cedar Swamp", "value": -1},
+            	{"name": "Wooded Indian Camps", "value": -1},
+            	{"name": "Fortifications", "value": -1},
+            	{"name": "Lt Infantry/Indians", "value": -1},
+            	{"name": "Artillery", "value": 1},
+            	{"name": "Storm", "value": 1},
+            	{"name": "Rifle first volley", "value": 1}
+            ],
+            "melee": {
+            	"attack": [
+	            	{"name": "Defender Rifle", "value": 1},
+	            	{"name": "Defender Disrupted/Shattered", "value": 1},
+	            	{"name": "Defender all militia", "value": 1},
+	            	{"name": "Defender in Cedar Swamp/marsh", "value": 1},
+	            	{"name": "Defender reduced Tyron Company", "value": 1},
+	            	{"name": "Attacker British Ambush", "value": 1},
+	            	{"name": "Attacker British Ambush: Americans using HRC movement", "value": 1},
+	            	{"name": "Defender British looting", "value": 1},
+	            	{"name": "Defender Mohawk with Huron/Abenaki", "value": 1},
+	            	{"name": "Defender surrounded", "value": 1}
+	            ],
+            	"defend": [
+	            	{"name": "Attacker Rifle", "value": -1},
+	            	{"name": "Defender in Fort Stanwix", "value": -2},
+	            	{"name": "Attacker all across Mohawk River", "value": -2},
+	            	{"name": "Attacker any across Mohawk River", "value": -1},
+	            	{"name": "Attacker all militia", "value": -1},
+	            	{"name": "Attacker all across stream/up slope", "value": -1},
+	            	{"name": "Attacker surrounded", "value": -1},
+	            	{"name": "Attacker all across fortifications", "value": -1},
+	            	{"name": "Indians defending own camps", "value": -1},
+	            	{"name": "Defender occupies Laagered wagon", "value": -1},
+	            	{"name": "Storm", "value": -1},
+	            	{"name": "Attacker reduced Tyron Company", "value": -1},
+	            	{"name": "Attacker British looting", "value": -1},
+	            	{"name": "Attacker Mohawk with Huron/Abenaki", "value": -1}
+	            ]
+            }
+        },
+        "startDateTime": "1777-08-06T06:00:00-04:00",
+        "startBritishMorale": 14,
+        "startAmericanMorale": 14
+    }
+]

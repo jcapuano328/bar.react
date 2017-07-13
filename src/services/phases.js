@@ -1,7 +1,4 @@
-'use strict'
-//var log = require('react-native-app-nub').Log;
-
-let defaultPhases = [
+const defaultPhases = [
 	"Initiative",
     {
     	"American": [
@@ -22,7 +19,7 @@ let defaultPhases = [
 	"End of Turn"
 ];
 
-let getNationalityPhases = (phases, nationality) => {
+const getNationalityPhases = (phases, nationality) => {
 	let nphases = [];
 	phases.forEach((p) => {
 		if (typeof p == 'object' && p.hasOwnProperty(nationality)) {
@@ -32,7 +29,7 @@ let getNationalityPhases = (phases, nationality) => {
 	return nphases;
 }
 
-let getAllPhases = (phases, nationality) => {
+const getAllPhases = (phases, nationality) => {
 	return phases.slice(0,1).concat(getNationalityPhases(phases,nationality), phases.slice(phases.length-1,phases.length));
 }
 
@@ -49,11 +46,11 @@ module.exports = {
         }
         return l[0];
     },
-	lengthall(nationality) {
+	countall(nationality) {
 		let l = getAllPhases(this.phases,nationality);
 		return l.length;
 	},
-	length(nationality) {
+	count(nationality) {
 		let l = getNationalityPhases(this.phases,nationality);
 		return l.length;
 	}

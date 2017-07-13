@@ -1,53 +1,14 @@
-'use strict'
-var Current = require('./current');
-var ArmyMorale = require('./armymorale');
-
 module.exports = {
-	current(init) {
-		return Current.initiative(init);
-	},
-	nationalities(battle) {
-		battle = battle || Current.battle();
-		return battle.nationalities || ['British', 'American'];
-    },
-    find(britmomentum,amermomentum,britdie,amerdie) {
-		let battle = Current.battle();
-		let nationalities = this.nationalities(battle);
-		let britInitMod = ArmyMorale.initiativeModifier(battle.moraleLevels, Current.britishMorale());
-        let amerInitMod = ArmyMorale.initiativeModifier(battle.moraleLevels, Current.americanMorale());
-
-        let britdrm = britInitMod + (2 * britmomentum);
-        let amerdrm = amerInitMod + (2 * amermomentum);
-		let diff = (britdie + britdrm)  - (amerdie + amerdrm);
-		let init = '';
+    find(momentum1,momentum2,initmod1,initmod2,die1,die2) {
+        let drm1 = initmod1 + (2 * momentum1);
+        let drm2 = initmod2 + (2 * momentum2);
+		let diff = (die1 + drm1)  - (die2 + drm2);
+		let init = -1;
 		if (diff > 0) {
-        	init = nationalities[0];
+        	init = 0;
 		} else if (diff < 0) {
-        	init = nationalities[1];
-        } else {
-			init = '';
+        	init = 1;
 		}
-
-		Current.initiative(init);
-		Current.player(init);
-		return Current.save()
-		.then(() => {
-			return init;
-		});
-    },
-	next() {
-		let init = this.current();
-		let nationalities = this.nationalities();
-		let idx = nationalities.findIndex((n) => n == init);
-		if (++idx > 1) {
-			idx = 0;
-		}
-		init = nationalities[idx];
-		Current.initiative(init);
-		Current.player(init);
-		return Current.save()
-		.then(() => {
-			return init;
-		});
-	}
+		return init;
+    }
 };

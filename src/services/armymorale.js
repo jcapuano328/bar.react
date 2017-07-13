@@ -1,11 +1,5 @@
-'use strict'
-import {Log} from 'react-native-app-nub';
-var log = Log;
-
-function find(levels, morale) {
-	return levels.find((l) => {
-		return (morale >= l.low && morale <= l.high);
-	}) || {name: 'demoralized'};
+const find = (levels, morale) => {
+	return levels.find((l) => (morale >= l.low && morale <= l.high)) || {name: 'demoralized'};
 }
 
 module.exports = {
@@ -34,7 +28,7 @@ module.exports = {
         }
         return 0;
     },
-	moraleModifier: function(levels, morale) {
+	moraleModifier(levels, morale) {
     	let level = find(levels, morale);
         if (level.name == 'fatigued') {
         	return -1;

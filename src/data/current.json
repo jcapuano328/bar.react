@@ -1,0 +1,16 @@
+{
+    battle: int,
+    turn: int,
+    phase: int,
+    player: int,
+    initiative: int,            
+    morale: {
+        "0": int,
+        "1": int,
+        "2": int
+    },                        
+    victory: {
+        "0": int,
+        "1": int
+    }    
+}

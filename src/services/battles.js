@@ -1,6 +1,4 @@
-'use strict';
-
-var battles = require('../stores/battles.json');
+import battles from '../data/battles.json';
 
 module.exports = {
     battles: battles,

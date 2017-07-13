@@ -1,5 +1,4 @@
-'use strict';
 import {AppRegistry} from 'react-native';
-let main = require('./src/mainView');
+import App from './src/app';
 
-AppRegistry.registerComponent('bar', () => main);
+AppRegistry.registerComponent('bar', () => App);
