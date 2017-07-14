@@ -31,7 +31,6 @@ var TurnPlayerView = React.createClass({
         this.props.nextPlayer();        
     },    
     render() {
-        console.log('turn player view', this.props.player);        
         const player = (this.props.player||'').toLowerCase();
         let width = this.state.width || 96;
         let height = this.state.height || 88;

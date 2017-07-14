@@ -1,12 +1,14 @@
-'use strict'
-
-var React = require('react');
+import React from 'react';
 import { View, Image, Text } from 'react-native';
-import {RadioButtonGroup,SpinNumeric,MultiSelectList,SelectDropdown} from 'react-native-app-nub';
+import { connect } from 'react-redux';
+import {RadioButtonGroup,SpinNumeric,MultiSelectList,SelectDropdown,Style} from 'react-native-nub';
 import {DiceRoll} from 'react-native-dice';
-var Icons = require('./res/icons');
-var Current = require('./services/current');
-var Melee = require('./services/melee');
+import Icons from '../res';
+import Melee from '../services/melee';
+import getNationalities from '../selectors/nationalities';
+import getAttackMeleeModifiers from '../selectors/attackMeleeModifiers';
+import getDefendMeleeModifiers from '../selectors/defendMeleeModifiers';
+
 
 let MeleeView = React.createClass({
     dice: [
@@ -15,12 +17,12 @@ let MeleeView = React.createClass({
     ],
     getInitialState() {
         return {
-            attacknationality: Melee.nationalities()[0],
+            attacknationality: this.props.nationalities[0],
             attackmorale: '0',
             attackleader: '0',
             attackmods: {},
 
-            defendnationality: Melee.nationalities()[1],
+            defendnationality: this.props.nationalities[1],
             defendmorale: '0',
             defendleader: '0',
             defendmods: {},
@@ -90,8 +92,8 @@ let MeleeView = React.createClass({
     },
     resolve() {
         this.state.results = Melee.resolve(this.state.odds,
-            this.state.attacknationality,+this.state.attackmorale,+this.state.attackleader,this.getModifiers('attack'),
-            this.state.defendnationality,+this.state.defendmorale,+this.state.defendleader,this.getModifiers('defend'),
+            this.state.attacknationality,+this.state.attackmorale,+this.state.attackleader,this.getModifiers('attack'),this.props.attackModifiers,
+            this.state.defendnationality,+this.state.defendmorale,+this.state.defendleader,this.getModifiers('defend'),this.props.defendModifiers,
             this.state.die1,this.state.die2);
         this.setState(this.state);
     },
@@ -109,18 +111,42 @@ let MeleeView = React.createClass({
 
         return (
             <View style={{flex: 1}}>
-                <View style={{flex: 5, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke', marginTop: 5}}>
+                    {/*
+                    <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
+                        <Text style={{flex: 1, fontSize: Style.Font.medium(),fontWeight: 'bold', marginLeft: 5, marginTop: 13}}>Odds</Text>
+                        <View style={{flex: 2, marginRight: 25}}>
+                            <SelectDropdown values={Melee.odds} value={this.state.odds} onSelected={this.onOddsChanged} />
+                        </View>
+                    </View>
+                    */}
+                    <View style={{flex: 3, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={{fontSize: Style.Font.large(), fontWeight: 'bold'}}>{this.state.results}</Text>
+                    </View>
+                    <View style={{flex: 2, marginRight: 5}}>
+                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
+                            onRoll={this.onDiceRoll}
+                            onDie={this.onDieChanged} />
+                    </View>
+                </View>                
+                <View style={{flex:1}}>
+                    <RadioButtonGroup title={'Odds'} buttons={Melee.odds.map((o) => ({label: o, value: o}))}
+                        state={this.state.odds}
+                        onSelected={this.onChangeOdds}
+                    />
+                </View>                
+                <View style={{flex: 6, flexDirection: 'row'}}>
                     <View style={{flex:1}}>
                         <MeleeInput
                             label={'Attack'}
-                            nationalities={Melee.nationalities()}
+                            nationalities={this.props.nationalities}
                             nationality={this.state.attacknationality}
                             onChangeNationality={this.onChangeAttackNationality}
                             morale={this.state.attackmorale}
                             onChangeMorale={this.onChangeAttackMorale}
                             leader={this.state.attackleader}
                             onChangeLeader={this.onChangeAttackLeader}
-                            modifiers={Melee.attackModifiers()}
+                            modifiers={this.props.attackModifiers}
                             mods={this.state.attackmods}
                             onChangeMod={this.onChangeAttackMod}
                         />
@@ -128,41 +154,17 @@ let MeleeView = React.createClass({
                     <View style={{flex:1}}>
                         <MeleeInput
                             label={'Defend'}
-                            nationalities={Melee.nationalities()}
+                            nationalities={this.props.nationalities}
                             nationality={this.state.defendnationality}
                             onChangeNationality={this.onChangeDefendNationality}
                             morale={this.state.defendmorale}
                             onChangeMorale={this.onChangeDefendMorale}
                             leader={this.state.defendleader}
                             onChangeLeader={this.onChangeDefendLeader}
-                            modifiers={Melee.defendModifiers()}
+                            modifiers={this.props.defendModifiers}
                             mods={this.state.defendmods}
                             onChangeMod={this.onChangeDefendMod}
                         />
-                    </View>
-                </View>
-                <View style={{flex:.5}}>
-                    <RadioButtonGroup title={'Odds'} buttons={Melee.odds.map((o) => {return {label: o, value: o};})}
-                        state={this.state.odds}
-                        onSelected={this.onChangeOdds}
-                    />
-                </View>
-                <View style={{flex: 1, flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke'}}>
-                    {/*
-                    <View style={{flex:1, flexDirection: 'row', marginTop: 15}}>
-                        <Text style={{flex: 1, fontSize: 16,fontWeight: 'bold', marginLeft: 5, marginTop: 13}}>Odds</Text>
-                        <View style={{flex: 2, marginRight: 25}}>
-                            <SelectDropdown values={Melee.odds} value={this.state.odds} onSelected={this.onOddsChanged} />
-                        </View>
-                    </View>
-                    */}
-                    <View style={{flex: 2, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={{fontSize: 26, fontWeight: 'bold'}}>{this.state.results}</Text>
-                    </View>
-                    <View style={{flex: 1, marginRight: 5}}>
-                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
-                            onRoll={this.onDiceRoll}
-                            onDie={this.onDieChanged} />
                     </View>
                 </View>
             </View>
@@ -175,7 +177,7 @@ let MeleeInput = React.createClass({
         return (
             <View style={{flex: 1, justifyContent: 'center', borderColor: 'gray', borderStyle: 'solid', borderLeftWidth: 1, borderRightWidth: 1}}>
                 <View style={{flex:.5, alignItems: 'center', backgroundColor:'silver'}}>
-                    <Text style={{fontSize: 18, fontWeight:'bold'}}>{this.props.label}</Text>
+                    <Text style={{fontSize: Style.Font.medium(), fontWeight:'bold'}}>{this.props.label}</Text>
                 </View>
                 <View style={{flex:1, alignItems: 'center'}}>
                     <RadioButtonGroup buttons={this.props.nationalities.map((n) => {
@@ -205,4 +207,12 @@ let MeleeInput = React.createClass({
     }
 });
 
-module.exports = MeleeView;
+const mapStateToProps = (state) => ({
+    nationalities: getNationalities(state),
+    attackModifiers: getAttackMeleeModifiers(state),
+    defendModifiers: getDefendMeleeModifiers(state)
+});
+
+module.exports = connect(
+  mapStateToProps
+)(MeleeView);

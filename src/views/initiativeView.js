@@ -45,17 +45,17 @@ var InitiativeView = React.createClass({
         this.props.nextInitiative();
     },
     resolve() {
-        console.log('initiative view', 'resolve', this.props.morale);
         let initmod1 = ArmyMorale.initiativeModifier(this.props.battle.moraleLevels, this.props.morale['0']);
         let initmod2 = ArmyMorale.initiativeModifier(this.props.battle.moraleLevels, this.props.morale['1']);
         
         let init = Initiative.find(+this.state.player1,+this.state.player2,initmod1,initmod2,this.state.die1,this.state.die2);
         this.props.setInitiative(init);
+        this.setState(this.state);
     },
     render() {
         return (
             <View style={{flex: 1}}>
-                <View style={{flex: 1,flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke'}}>
+                <View style={{flex: 1,flexDirection: 'row', alignItems: 'center', backgroundColor:'whitesmoke', marginTop: 5}}>
                     <View style={{flex: 1, marginRight: 5, alignItems: 'center'}}>
                         <IconButton image={Icons[(this.props.player||'tie').toLowerCase()]} width={80} height={80} resizeMode={'contain'} onPress={this.onNextPlayer}/>
                     </View>

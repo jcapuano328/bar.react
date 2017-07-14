@@ -1,9 +1,4 @@
-'use strict'
-import {Log} from 'react-native-app-nub';
-var log = Log;
-let Current = require('./current');
-
-let results = {
+const results = {
 	'1-3': ['2/- (D Momentum)','AC/- (D Momentum)','1*/-','1/-','1/-','D/-','D/-','R/-','PIN','R/R','-/R','-/R','-/D (A Momentum)','-/D (A Momentum)'],
     '1-2': ['AC/- (D Momentum)','1*/- (D Momentum)','1/-','D/-','D/-','D/-','R/-','PIN','R/R','-/R','-/R','-/D','-/D (A Momentum)','-/1* (A Momentum)'],
     '1-1': ['AC/- (D Momentum)','1*/- (D Momentum)','1/-','D/-','D/-','R/-','R/-','PIN','R/R','-/R','-/D','-/D','-/1 (A Momentum)','-/1* (A Momentum)'],
@@ -13,7 +8,7 @@ let results = {
     '4-1': ['D/- (D Momentum)','D/- (D Momentum)','R/-','R/-','PIN','R/R','-/R','-/D','-/D','-/1','-/1*','-/DC','-/AC (A Momentum)','-/2 (A Momentum)']
 };
 
-let tacticalDrm = (tacticaldie, attacktacticalldr, defendtacticalldr) => {
+const tacticalDrm = (tacticaldie, attacktacticalldr, defendtacticalldr) => {
 	let adrm = attacktacticalldr ?  1 : 0;
 	let ddrm = defendtacticalldr ? -1 : 0;
 
@@ -25,7 +20,7 @@ let tacticalDrm = (tacticaldie, attacktacticalldr, defendtacticalldr) => {
 	return 2;
 }
 
-let modifierDrm = (mods, modifiers) => {
+const modifierDrm = (mods, modifiers) => {
 	return mods.reduce((p,c,i,a) => {
 		let m = modifiers.find((mod) => mod == c) || {value:0};
 		return p + m.value;
@@ -34,31 +29,11 @@ let modifierDrm = (mods, modifiers) => {
 
 module.exports = {
 	odds: Object.keys(results),
-    nationalities() {
-		let battle = Current.battle();
-		let nationalities = [];
-		if (battle.hasOwnProperty('startBritishMorale')) {
-			nationalities.push('British');
-		}
-		if (battle.hasOwnProperty('startAmericanMorale')) {
-			nationalities.push('American');
-		}
-		if (battle.hasOwnProperty('startFrenchMorale')) {
-			nationalities.push('French');
-		}
-		return nationalities;
-	},
-	attackModifiers() {
-		let battle = Current.battle();
-		return [{name: 'Tactical Leader', value: 0}, {name: 'Diversion', value: 0}].concat(battle.modifiers.melee.attack);
-	},
-	defendModifiers() {
-		let battle = Current.battle();
-        return [{name: 'Tactical Leader', value: 0}].concat(battle.modifiers.melee.defend);
-	},
-    resolve(odds,attacknationality,attackmorale,attackleader,attackmods,defendnationality,defendmorale,defendleader,defendmods,combatdie,tacticaldie) {
-		let attackdrm = modifierDrm(attackmods, this.attackModifiers());
-		let defenddrm = modifierDrm(defendmods, this.defendModifiers());
+	resolve(odds,attacknationality,attackmorale,attackleader,attackmods,attackmodifiers,
+				defendnationality,defendmorale,defendleader,defendmods,defendmodifiers,
+				combatdie,tacticaldie) {
+		let attackdrm = modifierDrm(attackmods, attackmodifiers);
+		let defenddrm = modifierDrm(defendmods, defendmodifiers);
 		let attacktacticalldr = attackmods.indexOf('Tactical Leader') > -1;
 		let defendtacticalldr = defendmods.indexOf('Tactical Leader') > -1;
 
@@ -68,8 +43,8 @@ module.exports = {
 					- defendmorale - defendleader + defenddrm;
 		let rt = results[odds];
 
-        log.debug('Melee attackmorale = ' + attackmorale + ', attacknationality = ' + attacknationality + ', attackleader = ' + attackleader + ', attacktacticalldr = ' + attacktacticalldr + ', attackdrm = ' + attackdrm);
-        log.debug('Melee defendmorale = ' + defendmorale + ', defendnationality = ' + defendnationality + ', defendleader = ' + defendleader + ', defendtacticalldr = ' + defendtacticalldr + ', defenddrm = ' + defenddrm);
+        //console.log('Melee attackmorale = ' + attackmorale + ', attacknationality = ' + attacknationality + ', attackleader = ' + attackleader + ', attacktacticalldr = ' + attacktacticalldr + ', attackdrm = ' + attackdrm);
+        //console.log('Melee defendmorale = ' + defendmorale + ', defendnationality = ' + defendnationality + ', defendleader = ' + defendleader + ', defendtacticalldr = ' + defendtacticalldr + ', defenddrm = ' + defenddrm);
 
 		index += 2; // index-ize the die roll
 		if (index < 0) {index = 0;}

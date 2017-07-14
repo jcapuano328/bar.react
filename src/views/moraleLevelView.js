@@ -1,33 +1,20 @@
-'use strict'
-
-var React = require('react');
+import React from 'react';
 import { View } from 'react-native';
-import {SpinNumeric} from 'react-native-app-nub';
-var Current = require('./services/current');
-var Melee = require('./services/melee');
-var ArmyMorale = require('./services/armymorale');
+import { connect } from 'react-redux';
+import {SpinNumeric} from 'react-native-nub';
+import ArmyMorale from '../services/armymorale';
+import getMoraleLevels from '../selectors/moraleLevels';
+import getNationalities from '../selectors/nationalities';
+import {setMorale} from '../actions/current';
 
 let MoraleLevelView = React.createClass({
-    getInitialState() {
-        return {mod: 0};
-    },
-    componentDidMount: function() {
-        this.props.events.addListener('reset', this.onReset);
-    },
-    onReset() {
-        this.setState({mod: 0});
-    },
     onChangeArmyMorale(v) {
-        Current.armyMorale(this.props.nationality,+v);
-        Current.save()
-        .then(() => {
-            this.setState({mod: this.state.mod+1});
-        });
+        this.props.setMorale(this.props.nationality,+v);
     },
     render() {
-        let levels = Current.battle().moraleLevels;
+        let levels = this.props.moralelevels;
         let max = ArmyMorale.maxMorale(levels);
-        let level = Current.armyMorale(this.props.nationality);
+        let level = this.props.morale[this.props.nationality];
         let status = ArmyMorale.status(levels, level);
         let style = {
             //color: 'black',
@@ -52,4 +39,14 @@ let MoraleLevelView = React.createClass({
     }
 });
 
-module.exports = MoraleLevelView;
+const mapStateToProps = (state) => ({
+    moralelevels: getMoraleLevels(state),
+    morale: state.current.morale
+});
+
+const mapDispatchToProps = ({setMorale});
+
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MoraleLevelView);

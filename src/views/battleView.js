@@ -5,11 +5,11 @@ import ScrollableTabView from 'react-native-scrollable-tab-view';
 import {Style} from 'react-native-nub';
 import TurnView from './turnView';
 import InitiativeView from './initiativeView';
-//import FireView from './fireView';
-//import MeleeView from './meleeView';
-//import MoraleView from './moraleView';
-//import VictoryView from './victoryView';
-//import GeneralView from './generalView';
+import FireView from './fireView';
+import MeleeView from './meleeView';
+import MoraleView from './moraleView';
+import VictoryView from './victoryView';
+import GeneralView from './generalView';
 import Icons from '../res';
 import getBattle from '../selectors/battle';
 
@@ -29,11 +29,11 @@ var BattleView = React.createClass({
                     initialPage={this.state.initialPage}                    
                 >
                     <InitiativeView tabLabel="Initiative" />
-                    <View tabLabel="Fire" />
-                    <View tabLabel="Melee" />
-                    <View tabLabel="Morale" />
-                    <View tabLabel="Victory" />
-                    <View tabLabel="General" />
+                    <FireView tabLabel="Fire" />
+                    <MeleeView tabLabel="Melee" />
+                    <MoraleView tabLabel="Morale" />
+                    <VictoryView tabLabel="Victory" />
+                    <GeneralView tabLabel="General" />
                 </ScrollableTabView>                
             </View>
         );

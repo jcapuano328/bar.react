@@ -1,30 +1,32 @@
 import types from '../constants/actionTypes';
 import {toast} from './toast';
+import Battles from '../services/battles';
 import Phases from '../services/phases';
 import getBattle from '../selectors/battle';
 import getPlayer from '../selectors/currentPlayer';
 
 export const reset = (e) => (dispatch,getState) => {
-    const {current} = getState();
+    const {current} = getState();    
     e = e || {id: current.battle, player: 0, initiative: -1};    
-
+    let battle = Battles.get(e.id);
     let data = {
         battle: e.id,
         turn: 1,
         phase: 0,
         player: current.player,
         initiative: current.initiative,
+        // this isn't quite right...
         morale: {
-            "0": 0,
-            "1": 0,
-            "2": 0
+            "0": battle.startBritishMorale,
+            "1": battle.startAmericanMorale,
+            "2": battle.startFrenchMorale
         },
         victory: {
             "0": 0,
             "1": 0
         }        
-    };
-    
+    };    
+    Phases.init(battle);
     dispatch({type: types.SET_CURRENT, value: data});
 }
 
@@ -59,7 +61,7 @@ export const setInitiative = (v) => (dispatch) => {
 }
 
 export const setMorale = (side, m) => (dispatch) => {    
-    dispatch({type: types.SET_VICTORY, value: {side: side, value: m}});
+    dispatch({type: types.SET_MORALE, value: {side: side, value: m}});
 }
 
 export const setVictory = (side, vp) => (dispatch) => {    

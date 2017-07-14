@@ -1,6 +1,4 @@
-'use strict'
-
-var React = require('react');
+import React from 'react';
 import { View, Text } from 'react-native';
 import {DiceRoll} from 'react-native-dice';
 
@@ -22,9 +20,14 @@ var GeneralView = React.createClass({
     },
     render() {
         return (
-            <View style={{flex: 1, marginTop: 5, justifyContent: 'flex-start', alignItems: 'flex-end'}}>
-                <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2,this.state.die3]} type={'number'} onRoll={this.onDiceRoll} />
-                <View style={{flex:6}} />
+            <View style={{flex: 1}}>
+                <View style={{flex: 1, flexDirection:'row', justifyContent: 'flex-start', alignItems: 'flex-end', marginTop: 5}}>
+                    <View style={{flex:2}} />
+                    <View style={{flex:3}}>
+                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2,this.state.die3]} type={'number'} onRoll={this.onDiceRoll} />                    
+                    </View>
+                </View>
+                <View style={{flex:6}} />                
             </View>
         );
     }

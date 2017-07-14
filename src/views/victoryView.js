@@ -1,35 +1,21 @@
-'use strict'
-
-var React = require('react');
+import React from 'react';
 import { View, Image, Text } from 'react-native';
-import {SpinNumeric} from 'react-native-app-nub';
-var Icons = require('./res/icons');
-var Current = require('./services/current');
-var Melee = require('./services/melee');
+import { connect } from 'react-redux';
+import {SpinNumeric} from 'react-native-nub';
+import Icons from '../res';
+import {setVictory} from '../actions/current';
+import getNationalities from '../selectors/nationalities';
 
 let VictoryView = React.createClass({
-    getInitialState() {
-        return {mod: 0};
-    },
-    componentDidMount: function() {
-        this.props.events.addListener('reset', this.onReset);
-    },
-    onReset() {
-        this.setState({mod: 0});
-    },
     onChangeArmyVP(n) {
         return (v) => {
-            Current.armyVP(n,+v);
-            Current.save()
-            .then(() => {
-                this.setState({mod: this.state.mod+1});
-            });
-        };
+            this.props.setVictory(n,+v);
+        };            
     },
     render() {
         return (
-            <View>
-                {Melee.nationalities().map((n,i) => {
+            <View style={{flex: 1}}>
+                {this.props.nationalities.map((n,i) => {
                     return (
                         <View key={i} style={{flex: 1, flexDirection: 'row', alignItems: 'center'}}>
                             <View style={{flex:1}}/>
@@ -37,15 +23,26 @@ let VictoryView = React.createClass({
                                 <Image style={{marginLeft: 10, height: 48, width: 64, resizeMode: 'stretch'}} source={Icons[n.toLowerCase()]} />
                             </View>
                             <View style={{flex:2, alignItems: 'center'}}>
-                                <SpinNumeric value={Current.armyVP(n).toString()} min={0} max={50} onChanged={this.onChangeArmyVP(n)} />
+                                <SpinNumeric value={this.props.victory[i.toString()].toString()} min={0} max={50} onChanged={this.onChangeArmyVP(i)} />
                             </View>
                             <View style={{flex:1}}/>
                         </View>
                     );
                 })}
+                <View style={{flex: 8-this.props.nationalities.length}} />
             </View>
         );
     }
 });
 
-module.exports = VictoryView;
+const mapStateToProps = (state) => ({
+    nationalities: getNationalities(state),
+    victory: state.current.victory
+});
+
+const mapDispatchToProps = ({setVictory});
+
+module.exports = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(VictoryView);

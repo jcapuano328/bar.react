@@ -1,12 +1,11 @@
-'use strict'
-
-var React = require('react');
+import React from 'react';
 import { View, Image, Text } from 'react-native';
-import {RadioButtonGroup,MultiSelectList} from 'react-native-app-nub';
+import { connect } from 'react-redux';
+import {RadioButtonGroup,MultiSelectList} from 'react-native-nub';
 import {DiceRoll} from 'react-native-dice';
-var Icons = require('./res/icons');
-var Current = require('./services/current');
-var Fire = require('./services/fire');
+import Icons from '../res';
+import Fire from '../services/fire';
+import getBattle from '../selectors/battle';
 
 let FireView = React.createClass({
     dice: [
@@ -59,16 +58,37 @@ let FireView = React.createClass({
         return mods;
     },
     resolve() {
-        this.state.results = Fire.resolve(this.state.type,this.state.strength,this.state.range,this.getModifiers(),this.state.die1,this.state.die2);
+        this.state.results = Fire.resolve(this.state.type,this.state.strength,this.state.range,this.getModifiers(),(this.props.battle.modifiers.fire || []), this.state.die1,this.state.die2);
         this.setState(this.state);
     },
     render() {
-        let mods = Current.battle().modifiers.fire || [];
+        let mods = this.props.battle.modifiers.fire || [];
         let result = this.state.results.replace('*', '');
         let leader = this.state.results.indexOf('*') > -1 ? 'leader-casualty' : null;
         return (
             <View style={{flex: 1}}>
-                <View style={{flex: 4, flexDirection: 'row'}}>
+                <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start', backgroundColor:'whitesmoke', marginTop: 5}}>
+                    <View style={{flex: 3, flexDirection: 'row', alignItems: 'flex-start'}}>
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            {Icons[result]
+                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[result]} />
+                                : <Text style={{marginTop: 35, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
+                            }
+                        </View>
+                        <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            {Icons[leader]
+                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[leader]} />
+                                : null
+                            }
+                        </View>
+                    </View>
+                    <View style={{flex: 2, marginRight: 5}}>
+                        <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
+                            onRoll={this.onDiceRoll}
+                            onDie={this.onDieChanged} />
+                    </View>                    
+                </View>                
+                <View style={{flex: 6, flexDirection: 'row'}}>
                     <View style={{flex: 2, alignItems: 'center'}}>
                         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', alignSelf: 'stretch'}}>
                             <RadioButtonGroup title={'Type'} direction={'vertical'}
@@ -95,30 +115,15 @@ let FireView = React.createClass({
                         </View>
                     </View>
                 </View>
-                <View style={{flex: 1, backgroundColor:'whitesmoke'}}>
-                    <View style={{flex: 1, flexDirection: 'row', alignItems: 'flex-start'}}>
-                        <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-                            {Icons[result]
-                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[result]} />
-                                : <Text style={{marginTop: 35, fontSize: 20, fontWeight: 'bold'}}>{this.state.results}</Text>
-                            }
-                        </View>
-                        <View style={{flex: 1, alignItems: 'flex-end', justifyContent: 'center'}}>
-                            {Icons[leader]
-                                ? <Image style={{marginTop: 5, height: 80, width: 80, resizeMode: 'stretch'}} source={Icons[leader]} />
-                                : null
-                            }
-                        </View>
-                        <View style={{flex: 2, marginRight: 15}}>
-                            <DiceRoll dice={this.dice} values={[this.state.die1,this.state.die2]} type={'number'}
-                                onRoll={this.onDiceRoll}
-                                onDie={this.onDieChanged} />
-                        </View>
-                    </View>
-                </View>
             </View>
         );
     }
 });
 
-module.exports = FireView;
+const mapStateToProps = (state) => ({
+    battle: getBattle(state)
+});
+
+module.exports = connect(
+  mapStateToProps
+)(FireView);
