@@ -112,7 +112,7 @@ module.exports = {
 		});
 	},
 	nextPhase() {
-		//console.log('>>>> Next Phase ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
+		console.log('>>>> Next Phase ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
 		if (++_current.phase > Phases.length(_current.player) && this.isInitiativePlayer()) {
 			// move to next player
 			this.nextPlayer(false);
@@ -124,7 +124,7 @@ module.exports = {
 			this.nextPlayer(false);
 			_current.phase = 0;
 		}
-		//console.log('             -> ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
+		console.log('             -> ' + _current.initiative + '/' + _current.player + '/' + _current.phase);
     	return this.save()
         .then(() => {
         	return this.phase();

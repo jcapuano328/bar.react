@@ -59,19 +59,19 @@ module.exports = (state = defaultState, action) => {
         let phase = state.phase - 1;
         let player = state.player;
         let turn = state.turn;
-		if (phase < 0) {
-			phase = action.value - 1;
-            if (action.value.changeplayer) {
-                if (player == 0) {
-                    turn = prevTurn(state.turn);
-                    player = 1;
-                } else {
-                    player = 0;
-                }
-            } else {
-                turn = prevTurn(state.turn);
+
+        if (phase < 0) {
+            phase = action.value.allphases - 1;
+            turn = prevTurn(state.turn);
+            player = player == 0 ? 1 : 0;
+        }
+        else if (phase < 1) {
+            if (player != state.initiative) {
+                phase = action.value.playerphases;
+                player = player == 0 ? 1 : 0;
             }
-		}
+        }
+
         return {
             ...state,
             turn: turn,
@@ -83,15 +83,19 @@ module.exports = (state = defaultState, action) => {
         phase = state.phase + 1;
         player = state.player;
         turn = state.turn;
-		if (phase >= action.value.maxphases) {
-			phase =  0;
-            if (player == 1) {
-                turn = nextTurn(state.turn,action.value.maxturns);
-                player = 0;
-            } else {
-                player = 1;
+
+        if (phase >= action.value.maxphases) {
+            phase = 0;
+            turn = nextTurn(state.turn,action.value.maxturns);
+            player = player == 0 ? 1 : 0;
+        }
+		else if (phase > action.value.playerphases) {
+            if (player == state.initiative) {
+                phase = 1;
+                player = player == 0 ? 1 : 0;
             }
-		}
+        }        
+        
         return {
             ...state,
             turn: turn,

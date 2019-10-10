@@ -40,12 +40,12 @@ export const nextTurn = () => (dispatch,getState) => {
 
 export const prevPhase = () => (dispatch,getState) => {        
     const player = getPlayer(getState());
-    dispatch({type: types.PREV_PHASE, value: Phases.count(player)});
+    dispatch({type: types.PREV_PHASE, value: {playerphases: Phases.count(player), allphases: Phases.countall(player)}});
 }
 export const nextPhase = () => (dispatch,getState) => {        
     const battle = getBattle(getState());
-    const player = getPlayer(getState());
-    dispatch({type: types.NEXT_PHASE, value: {maxphases: Phases.count(player), maxturns: battle.turns}});
+    const player = getPlayer(getState());        
+    dispatch({type: types.NEXT_PHASE, value: {playerphases: Phases.count(player), maxphases: Phases.countall(player), maxturns: battle.turns}});
 }
 
 export const nextPlayer = () => (dispatch) => {    

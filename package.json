@@ -1,6 +1,6 @@
 {
   "name": "bar",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "private": true,
   "scripts": {
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -13,10 +13,12 @@
     "install-dbg": "adb -d install -r android/app/build/outputs/apk/bar-debug-1.2.apk",
     "install-stg": "adb -d install -r android/app/build/outputs/apk/bar-releaseStaging-1.2.apk",    
     "install-rel": "adb -d install -r android/app/build/outputs/apk/bar-release-1.2.apk",
-    "push": "code-push release-react BARAssistant android",
-    "promote": "code-push promote BARAssistant Staging Production --description '' --mandatory",        
+    "push": "code-push release-react BARAssistant android --description v1.2.1",
+    "promote": "code-push promote BARAssistant Staging Production --description v1.2.1 --mandatory",        
     "bridge": "adb reverse tcp:8081 tcp:8081",
     "menu": "adb shell input keyevent 82",
+    "emulate-s3": "%ANDROID_HOME%/tools/emulator.exe -avd Galaxy_SIII",
+    "emulate-nexus7": "%ANDROID_HOME%/tools/emulator.exe -avd Nexus_7", 	
     "logs": "adb logcat *:S ReactNative:V ReactNativeJS:V"
   },
   "dependencies": {

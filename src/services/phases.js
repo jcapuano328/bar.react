@@ -51,7 +51,7 @@ module.exports = {
 		return l.length;
 	},
 	count(nationality) {
-		let l = getNationalityPhases(this.phases,nationality);
+		let l = getNationalityPhases(this.phases,nationality);		
 		return l.length;
 	}
 };
